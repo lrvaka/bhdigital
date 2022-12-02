@@ -49,13 +49,13 @@ const Loading = ({ ...props }) => {
           rotationX: -90,
           ease: "back",
           stagger: 0.05,
-        })
-        .to("#backdrop", { y: "100%", duration: 0.75, ease: "power4.in" })
-        .to(
-          "#backdrop-white",
-          { y: "100%", duration: 0.75, ease: "power4.in" },
-          "-=0.5"
-        );
+        });
+      // .to("#backdrop", { y: "100%", duration: 0.75, ease: "power4.in" })
+      // .to(
+      //   "#backdrop-white",
+      //   { y: "100%", duration: 0.75, ease: "power4.in" },
+      //   "-=0.5"
+      // );
     }, container); // <- IMPORTANT! Scopes selector text
 
     return () => ctx.revert(); // cleanup
