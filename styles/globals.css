@@ -1,9 +1,24 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: "Organetto";
+  src: url("../public/fonts/Organetto-UltraBoldSemiExt.ttf");
+}
+
+@layer base {
+  html {
+    font-family: bebas-neue-pro-expanded, sans-serif;
+  }
+}
+
 html,
 body {
   padding: 0;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  background-color: #001a28;
+  color: white;
 }
 
 a {
@@ -13,14 +28,54 @@ a {
 
 * {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
-  body {
-    color: white;
-    background: black;
-  }
+.text-outline {
+  -webkit-text-stroke: 2px #fff;
+}
+
+.service-item--bordered::after {
+  content: "";
+  display: block;
+  width: 100%;
+  border-bottom: #a1a1a1 2px solid;
+  padding-top: 1rem;
+}
+
+.service-body {
+  overflow-y: hidden;
+  transition: all 0.4s ease-out;
+  -webkit-transition: all 0.4s ease-out;
+}
+
+.service-heading {
+  color: transparent;
+  -webkit-text-stroke: 2px #fff;
+  transition: all 0.8s ease-out;
+  -webkit-transition: all 0.8s ease-out;
+}
+
+.active > .service-heading {
+  color: white;
+  -webkit-text-stroke: 0px;
+}
+
+.active > .service-body {
+  margin-bottom: 2rem;
+}
+
+.service-image {
+  z-index: 1;
+  transition: all 0.4s ease-out;
+  -webkit-transition: all 0.4s ease-out;
+}
+
+.service-image.active {
+  z-index: 3;
+}
+
+.service-image.previous {
+  z-index: 2;
 }
