@@ -36,7 +36,11 @@ const Loading = ({ ...props }) => {
         })
         .fromTo(
           "#logo",
-          { x: containerWidth ? Number(containerWidth) / 2 : 0 },
+          {
+            x: containerWidth
+              ? Number(containerWidth) / 2 - Number(logoWidth)
+              : 0,
+          },
           { x: 0, duration: 0.5 }
         )
         .to("#text", { visibility: "visible", opacity: 1 }, "-=3")
