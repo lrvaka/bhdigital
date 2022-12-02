@@ -7,7 +7,7 @@ const Loading = ({ ...props }) => {
   const container = useRef<HTMLDivElement | null>(null);
   const tl = useRef<GSAPTimeline>();
 
-  useIsomorphicLayoutEffect(() => {
+  useLayoutEffect(() => {
     // Note that ref.current may be null. This is expected, because you may
     // conditionally render the ref-ed element, or you may forgot to assign it
 
