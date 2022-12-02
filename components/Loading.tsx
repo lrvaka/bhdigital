@@ -51,13 +51,13 @@ const Loading = ({ ...props }) => {
           rotationX: -90,
           ease: "back",
           stagger: 0.05,
-        });
-      // .to("#backdrop", { y: "100%", duration: 0.75, ease: "power4.in" })
-      // .to(
-      //   "#backdrop-white",
-      //   { y: "100%", duration: 0.75, ease: "power4.in" },
-      //   "-=0.5"
-      // );
+        })
+        .to("#backdrop", { y: "100%", duration: 0.75, ease: "power4.in" })
+        .to(
+          "#backdrop-white",
+          { y: "100%", duration: 0.75, ease: "power4.in" },
+          "-=0.5"
+        );
     }, container); // <- IMPORTANT! Scopes selector text
 
     return () => ctx.revert(); // cleanup
@@ -78,7 +78,7 @@ const Loading = ({ ...props }) => {
             id="logo"
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 524.99 571.61"
-            className="max-w-[125px] h-full w-full"
+            className="max-w-[100px] md:max-w-[125px] h-full w-full"
             {...props}
           >
             <defs>
@@ -101,7 +101,10 @@ const Loading = ({ ...props }) => {
               d="M190.06 378.7c11.26 3.23 19.6-3.73 19.6-17.84 0-16.67-11.63-36.95-25.98-45.29L53.79 240.08v59.1l129.89 75.49c2.15 1.25 4.27 2.61 6.38 4.03ZM183.68 436.69 53.79 361.2v60.38l129.89 75.49c14.35 8.34 25.98 1.58 25.98-15.09s-11.63-36.95-25.98-45.29ZM314.8 271.61l155.4-89.72v120l-155.4 89.72v-120zM314.8 451.61l155.4-89.72v120l-155.4 89.72v-120z"
             />
           </svg>
-          <h3 id="text" className="leading-none text-3xl max-h-fit self-center">
+          <h3
+            id="text"
+            className="leading-none text-2xl md:text-3xl max-h-fit self-center"
+          >
             Blockhead
             <br />
             Digital
