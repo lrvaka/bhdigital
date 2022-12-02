@@ -62,7 +62,7 @@ export default function WorkCarousel() {
           <div className="flex items-center h-72 justify-center w-full max-w-5xl   mx-auto">
             <div className="flex-1 h-full flex flex-col  ">
               <div className="flex-1">
-                <h2 className="text-8xl mb-2">Doug'll Do It</h2>
+                <h2 className="text-8xl mb-2">Doug&apos;ll Do It</h2>
                 <ul className="flex gap-4 mb-10">
                   <li className="flex">
                     Web Design + <br /> Development{" "}
