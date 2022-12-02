@@ -1,4 +1,4 @@
-import { Ref, useLayoutEffect, useRef } from "react";
+import { Ref, useEffect, useLayoutEffect, useRef } from "react";
 import { gsap, SplitText } from "../utils/gsap";
 
 const Loading = ({ ...props }) => {
@@ -6,7 +6,7 @@ const Loading = ({ ...props }) => {
   const container = useRef<HTMLDivElement | null>(null);
   const tl = useRef<GSAPTimeline>();
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     // Note that ref.current may be null. This is expected, because you may
     // conditionally render the ref-ed element, or you may forgot to assign it
 
@@ -37,9 +37,7 @@ const Loading = ({ ...props }) => {
         .fromTo(
           "#logo",
           {
-            x: containerWidth
-              ? Number(containerWidth) / 2 - Number(logoWidth)
-              : 0,
+            x: containerWidth ? Number(containerWidth) / 2 : 0,
           },
           { x: 0, duration: 0.5 }
         )
