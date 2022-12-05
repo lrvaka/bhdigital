@@ -309,7 +309,7 @@ const footerNavigation = {
     {
       name: "Facebook",
       href: "#",
-      icon: (props) => (
+      icon: (props: any) => (
         <svg fill="currentColor" viewBox="0 0 24 24" {...props}>
           <path
             fillRule="evenodd"
@@ -322,7 +322,7 @@ const footerNavigation = {
     {
       name: "Instagram",
       href: "#",
-      icon: (props) => (
+      icon: (props: any) => (
         <svg fill="currentColor" viewBox="0 0 24 24" {...props}>
           <path
             fillRule="evenodd"
