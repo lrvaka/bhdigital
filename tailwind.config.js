@@ -7,7 +7,7 @@ module.exports = {
   theme: {
     extend: {},
   },
-  plugins: [],
+  plugins: [require("@tailwindcss/forms")],
   extend: {
     fontFamily: {
       organetto: ["Organetto", "sans-serif"],
