@@ -2,11 +2,17 @@ import "../styles/globals.css";
 import type { AppProps } from "next/app";
 import * as fbq from "../lib/fpixel";
 import Script from "next/script";
+import Head from "next/head";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
-      {" "}
+      <Head>
+        <meta
+          name="facebook-domain-verification"
+          content="xma52wwowgo8ighqhbmu6of5z2kqro"
+        />
+      </Head>{" "}
       <Script
         id="fb-pixel"
         strategy="afterInteractive"
