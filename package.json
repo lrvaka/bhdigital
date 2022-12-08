@@ -14,9 +14,13 @@
     "@react-three/drei": "^9.36.0",
     "@react-three/fiber": "^8.8.10",
     "gsap": "npm:@gsap/business@^3.11.3",
+    "little-state-machine": "^4.8.0",
     "next": "12.3.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-hook-form": "^7.40.0",
+    "react-router-dom": "^6.4.4",
+    "react-transition-group": "^4.4.5",
     "swiper": "^8.4.4",
     "three": "^0.145.0"
   },
