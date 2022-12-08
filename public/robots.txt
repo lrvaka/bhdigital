@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://www.blockhead.digital
+
+# Sitemaps
+Sitemap: https://www.blockhead.digital/sitemap.xml
