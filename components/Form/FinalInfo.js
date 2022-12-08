@@ -1,4 +1,5 @@
 import { useState } from "react";
+import * as fbq from "../../lib/fpixel";
 
 const FinalInfo = ({ formData, setFormData, page, setPage, x, setX }) => {
   const [isSent, setIsSent] = useState(false);
@@ -19,6 +20,7 @@ const FinalInfo = ({ formData, setFormData, page, setPage, x, setX }) => {
                 body: JSON.stringify(formData),
               })
                 .then(() => setIsSent(true))
+                .then(() => fbq.lead())
                 .catch(() => alert("There was an error, please try again"));
             }}
             className="flex flex-col gap-2 w-full"
