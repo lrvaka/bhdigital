@@ -8,7 +8,11 @@ import TellUsMoreInfo from "./TellUsMoreInfo";
 import FinalInfo from "./FinalInfo";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
 
-export default function Form() {
+interface FormProps {
+  landingPage?: Boolean;
+}
+
+export default function Form({ landingPage }: FormProps) {
   const [page, setPage] = useState(0);
 
   const [x, setX] = useState(0);
@@ -28,7 +32,7 @@ export default function Form() {
 
   const componentList = [
     <IndustryInfo
-      key={Math.random}
+      key={Number(Math.random)}
       formData={formData}
       setFormData={setFormData}
       page={page}
@@ -37,7 +41,7 @@ export default function Form() {
       setX={setX}
     />,
     <ChallengeInfo
-      key={Math.random}
+      key={Number(Math.random)}
       formData={formData}
       setFormData={setFormData}
       page={page}
@@ -46,7 +50,7 @@ export default function Form() {
       setX={setX}
     />,
     <LeadSourceInfo
-      key={Math.random}
+      key={Number(Math.random)}
       formData={formData}
       setFormData={setFormData}
       page={page}
@@ -55,7 +59,7 @@ export default function Form() {
       setX={setX}
     />,
     <PaidAdCheck
-      key={Math.random}
+      key={Number(Math.random)}
       formData={formData}
       setFormData={setFormData}
       page={page}
@@ -64,7 +68,7 @@ export default function Form() {
       setX={setX}
     />,
     <TellUsMoreInfo
-      key={Math.random}
+      key={Number(Math.random)}
       formData={formData}
       setFormData={setFormData}
       page={page}
@@ -73,7 +77,7 @@ export default function Form() {
       setX={setX}
     />,
     <FinalInfo
-      key={Math.random}
+      key={Number(Math.random)}
       formData={formData}
       setFormData={setFormData}
       page={page}
@@ -96,14 +100,20 @@ export default function Form() {
             </h2>
             <p className="mt-3 text-lg leading-6 text-gray-200">
               Growing your business is just a few clicks away! Submit the form
-              and we'll get in touch with you within 24 hours!
+              and we&apos;ll get in touch with you within 24 hours!
             </p>
+            {landingPage ? (
+              <p className="mt-6 text-lg leading-6 font-bold text-gray-200">
+                Scroll down to find out more about Blockhead Digital & how we
+                can grow your construction business! ⬇️
+              </p>
+            ) : null}
           </div>
         </div>
-        <div className=" py-16 px-4 sm:px-6 lg:col-span-3 lg:py-24 lg:px-8 xl:pl-12">
+        <div className=" pb-16 px-4 sm:px-6 lg:col-span-3 lg:px-8 xl:pl-12 lg:py-16">
           <div className="bg-slate-100 rounded-tr-xl rounded-tl-xl h-10 overflow-hidden">
             <div
-              className="bg-teal-600 animate-colorBg w-full h-full transition-all ease-in-out"
+              className="bg-teal-600 animate-colorBg w-full h-full transition-all duration-1000 ease-in-expo"
               style={{
                 width:
                   page === 0
@@ -120,7 +130,7 @@ export default function Form() {
               }}
             ></div>
           </div>
-          <div className="mx-auto max-w-lg lg:max-w-none bg-slate-800 p-5 lg:p-10 rounded-lg min-h-[620px] overflow-hidden relative">
+          <div className="mx-auto lg:max-w-none bg-slate-800/75 p-5 lg:p-10 rounded-br-xl rounded-bl-xl  min-h-[620px] overflow-hidden relative w-full">
             <TransitionGroup component={null}>
               <CSSTransition
                 classNames="slide"

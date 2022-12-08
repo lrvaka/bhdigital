@@ -1,8 +1,15 @@
-import { useRef, useState, useEffect, ReactEventHandler } from "react";
-import { Canvas, useFrame, useThree } from "@react-three/fiber";
-import { Mesh } from "three";
+import {
+  useRef,
+  useState,
+  useEffect,
+  ReactEventHandler,
+  MouseEventHandler,
+} from "react";
+import { Canvas, ThreeElements, useFrame, useThree } from "@react-three/fiber";
+import { CanvasTexture, Mesh } from "three";
 import { useTexture, RoundedBox } from "@react-three/drei";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
+import { gsap, SplitText } from "../utils/gsap";
 
 const CameraController = () => {
   const { camera, gl } = useThree();
@@ -11,7 +18,7 @@ const CameraController = () => {
   const sizes = { width: 0, height: 0 };
   const cursor = { x: 0, y: 0 };
 
-  const changeCursorCords = (event) => {
+  const changeCursorCords = (event: MouseEvent) => {
     cursor.x = event.clientX / sizes.width - 0.5;
     cursor.y = event.clientY / sizes.height - 0.5;
   };
@@ -43,17 +50,23 @@ const CameraController = () => {
 
 function Box({ ...props }) {
   const [matcap1] = useTexture(["./matcap1.png"]);
-  // This reference gives us direct access to the THREE.Mesh object
-  const ref = useRef(null);
 
-  // Hold state for hovered and clicked events
+  const ref = useRef<Mesh>(null!);
 
-  // Subscribe this component to the render-loop, rotate the mesh every frame
+  useEffect(() => {
+    console.log(ref.current);
+    let ctx = gsap.context(() => {
+      gsap.from(ref.current.scale, { duration: 10, x: 0, y: 0 });
+    }, ref);
+
+    return () => ctx.revert(); // cleanup
+  }, []);
+
   useFrame((state, delta) => {
     ref.current.rotation.x += 0.1 * delta;
     ref.current.rotation.y += 0.1 * delta;
   });
-  // Return the view, these are regular Threejs elements expressed in JSX
+
   return (
     <mesh {...props} ref={ref}>
       <RoundedBox args={[2, 2, 2]} radius={0.25} smoothness={25}>
@@ -63,11 +76,15 @@ function Box({ ...props }) {
   );
 }
 
-export default function HeroBackground() {
+interface HeroBackgroundProps {
+  landingPage?: Boolean;
+}
+
+export default function HeroBackground({ landingPage }: HeroBackgroundProps) {
   return (
     <Canvas style={{ position: "absolute" }} className="absolute top-0 left-0">
       <CameraController />
-      <Box position={[1, 0.5, 2]} />
+      <Box position={landingPage ? [-0.5, 0, 2] : [1, 0.5, 2]} />
     </Canvas>
   );
 }

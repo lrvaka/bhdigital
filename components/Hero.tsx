@@ -4,12 +4,16 @@ export default function Hero() {
       <div className="mx-auto max-w-3xl pt-48 pb-40">
         <div>
           <div>
-            <h1 className="text-4xl font-bold tracking-tight sm:text-center sm:text-6xl">
+            {/* <h1 className="text-4xl font-bold tracking-tight sm:text-center sm:text-6xl">
               We Generate{" "}
               <span className="relative before:absolute before:-z-10 z-10 before:bg-lime-600 before:h-1/2 before:w-full before:bottom-3 before:-rotate-2">
                 Qualified Sales
               </span>{" "}
               Appointments For Construction Businesses
+            </h1> */}
+            <h1 className="text-4xl font-bold tracking-tight sm:text-center sm:text-6xl">
+              Digital Marketing for Construction Businesses | Boost Your Online
+              Presence and Attract More Leads
             </h1>
             <p className="mt-6 text-lg leading-8 text-gray-100 sm:text-center">
               Stop buying low quality traffic from agencies that sell you

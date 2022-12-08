@@ -14,11 +14,13 @@ module.exports = {
           "60%": { background: "#FCCA00" },
           "80%": { background: "#33CC36" },
           "100%": { background: "#33CCCC" },
-         
         },
       },
       animation: {
         colorBg: "colorBg 9s ease-in-out infinite",
+      },
+      transitionTimingFunction: {
+        "ease-in-expo": "cubic-bezier(0.7, 0, 0.84, 0)",
       },
     },
   },

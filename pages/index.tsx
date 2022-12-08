@@ -8,10 +8,23 @@ import Form from "../components/Form/Form";
 import Features from "../components/Features";
 import ExtraFeatures from "../components/ExtraFeatures";
 import Testimonial from "../components/Testimonial";
+import Head from "../components/ui/Head";
+
+const meta = {
+  title:
+    "Blockhead Digital - Digital Marketing for Construction Companies | Boost Your Online Presence and Attract More Leads",
+  description:
+    "Maximize your online presence and increase leads with our specialized digital marketing services for construction companies. From SEO to social media, we have the tools and expertise to drive results for your business.",
+  url: "https://www.blockhead.digital",
+  twitter: "https://twitter.com/bh_digital_",
+  imageUrl: "https://www.blockhead.digital/images/twitter.png",
+  imageAlt: "Blockhead Digital",
+};
 
 const Home: NextPage = () => {
   return (
     <>
+      <Head heading={meta} />
       <Loading />
       <div className="font-bebas">
         <div className="relative">
