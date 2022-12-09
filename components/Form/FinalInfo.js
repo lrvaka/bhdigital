@@ -6,7 +6,7 @@ const FinalInfo = ({ formData, setFormData, page, setPage, x, setX }) => {
   return (
     <div className="flex flex-col justify-center items-center w-full h-full absolute top-0 left-0 p-5 lg:p-10">
       {isSent ? (
-        <p>Thank you!</p>
+        <p>Thank you for your submission! We&apos;ll get in touch with you right away!</p>
       ) : (
         <>
           <div className="text-2xl lg:text-3xl mb-4 text-center">

@@ -65,7 +65,7 @@ const LandingPage: NextPage = () => {
         <Testimonial />
 
         <ExtraFeatures />
-        <Form />
+        <CTA />
         <Footer />
       </div>
     </>
