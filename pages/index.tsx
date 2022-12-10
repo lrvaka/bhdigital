@@ -12,7 +12,7 @@ import Head from "../components/ui/Head";
 
 const meta = {
   title:
-    "Blockhead Digital - Digital Marketing for Construction Companies | Boost Your Online Presence and Attract More Leads",
+    "Blockhead Digital - Digital Marketing for Businesses | Boost Your Online Presence and Attract More Leads",
   description:
     "Maximize your online presence and increase leads with our specialized digital marketing services for construction companies. From SEO to social media, we have the tools and expertise to drive results for your business.",
   url: "https://www.blockhead.digital",

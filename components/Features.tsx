@@ -91,7 +91,7 @@ export default function Features() {
             Marketing strategies that work
           </h2>
           <p className="mx-auto mt-4 max-w-3xl text-center text-xl text-gray-400">
-            As a construction business, your success is dependent on the number
+            As a growing business, your success is dependent on the number
             of qualified sales appointments booked into your calendar. We use
             strategies that directly lead to sales!
           </p>
