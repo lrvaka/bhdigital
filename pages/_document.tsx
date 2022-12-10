@@ -2,7 +2,7 @@ import { Html, Head, Main, NextScript } from "next/document";
 
 export default function Document() {
   return (
-    <Html>
+    <Html lang="en">
       <Head>
         <link rel="stylesheet" href="https://use.typekit.net/vks2ayv.css" />
         <link rel="icon" href="/favicon.ico" type="image/png" />
