@@ -41,11 +41,18 @@ const communicationFeatures = [
   },
   {
     id: 2,
-    name: "First month FREE!",
+    name: "Don't pay until first sale!",
     description:
-      "That's right, first month free of charge! - just send over the adspend and we'll work our magic!",
+      "That's right, don't start paying until first sale! - just send over initial set up feed and the adspend and we'll work our magic!",
     icon: BanknotesIcon,
   },
+  // {
+  //   id: 2,
+  //   name: "Money back guarantee!",
+  //   description:
+  //     "That's right, don't start paying until first sale! - just send over initial set up feed and the adspend and we'll work our magic!",
+  //   icon: BanknotesIcon,
+  // },
 ];
 
 export default function Features() {
@@ -91,8 +98,8 @@ export default function Features() {
             Marketing strategies that work
           </h2>
           <p className="mx-auto mt-4 max-w-3xl text-center text-xl text-gray-400">
-            As a growing business, your success is dependent on the number
-            of qualified sales appointments booked into your calendar. We use
+            As a growing business, your success is dependent on the number of
+            qualified sales appointments booked into your calendar. We use
             strategies that directly lead to sales!
           </p>
         </div>

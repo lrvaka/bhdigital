@@ -7,6 +7,11 @@ const features = [
       "We run highly optimized & converting paid advertisements on platforms like Google & Facebook that generate qualified leads & sales appointments.",
   },
   {
+    name: "CRM",
+    description:
+      "We'll create a full-fledged backend CRM for you to manage your new leads and help you convert them into high converting, qualified sales appointments!",
+  },
+  {
     name: "Web Design & Dev",
     description:
       "Blockhead Digital has a deep understanding of web design & development - we'll transform your website, your hub for all digital traffic.",
