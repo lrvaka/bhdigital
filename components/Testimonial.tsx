@@ -51,8 +51,8 @@ export default function Testimonial() {
             <div className="mx-auto max-w-3xl text-center text-2xl font-medium leading-9 text-gray-300">
               <p>
                 &ldquo;Blockhead Digital elevated the digital presence of my
-                company in every aspect - I recommend them to any business
-                looking to take their business to the next level.&rdquo;
+                company in every aspect - I recommend them to anyone looking to
+                take their business to the next level.&rdquo;
               </p>
             </div>
             <footer className="mt-8">
