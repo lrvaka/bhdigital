@@ -15,7 +15,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     //only play Loading animation on first load
     setTimeout(() => {
       setFirstLoad(true);
-    }, 5000);
+    }, 75000);
   }, []);
 
   return (
