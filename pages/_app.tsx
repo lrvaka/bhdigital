@@ -15,7 +15,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     //only play Loading animation on first load
     setTimeout(() => {
       setFirstLoad(true);
-    }, 4000);
+    }, 5000);
   }, []);
 
   return (
@@ -43,7 +43,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     `,
         }}
       />
-      {route.asPath === "/" && !firstLoad ? <Loading /> : null}
+      {route.asPath.includes("/") && !firstLoad ? <Loading /> : null}
       <Component {...pageProps} />
     </>
   );
