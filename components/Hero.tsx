@@ -12,8 +12,8 @@ export default function Hero() {
               Appointments For Construction Businesses
             </h1> */}
             <h1 className="text-4xl font-bold tracking-tight sm:text-center sm:text-6xl">
-              Digital Marketing for Businesses | Boost Your Online
-              Presence and Attract More Leads
+              Digital Marketing for Businesses <br /> Boost Your Online Presence
+              and Attract More Leads
             </h1>
             <p className="mt-6 text-lg leading-8 text-gray-100 sm:text-center">
               Stop buying low quality traffic from agencies that sell you

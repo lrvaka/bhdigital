@@ -13,9 +13,9 @@ export default function Testimonial() {
           fill="none"
           viewBox="0 0 404 404"
           role="img"
-          aria-labelledby="svg-workcation"
+          aria-labelledby="svg-exquisite-wood-floors"
         >
-          <title id="svg-workcation">Workcation</title>
+          <title id="svg-exquisite-wood-floors">exquisite wood floors</title>
           <defs>
             <pattern
               id="ad119f34-7694-4c31-947f-5c9d249b21f3"
@@ -44,13 +44,15 @@ export default function Testimonial() {
 
         <div className="relative">
           <div className="mx-auto w-32 h-32 invert">
-            <Image src={ewfLogo} alt="Workcation" />
+            <Image src={ewfLogo} alt="exquisite wood floors" />
           </div>
 
           <blockquote className="mt-10">
             <div className="mx-auto max-w-3xl text-center text-2xl font-medium leading-9 text-gray-300">
               <p>
-                &ldquo;Blockhead Digital elevated the digital presence of my company in every aspect - I recommend them to any construction business looking to take their business to the next level.&rdquo;
+                &ldquo;Blockhead Digital elevated the digital presence of my
+                company in every aspect - I recommend them to any business
+                looking to take their business to the next level.&rdquo;
               </p>
             </div>
             <footer className="mt-8">

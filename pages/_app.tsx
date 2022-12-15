@@ -3,8 +3,21 @@ import type { AppProps } from "next/app";
 import * as fbq from "../lib/fpixel";
 import Script from "next/script";
 import Head from "next/head";
+import Loading from "../components/Loading";
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 
 function MyApp({ Component, pageProps }: AppProps) {
+  const route = useRouter();
+  const [firstLoad, setFirstLoad] = useState(false);
+
+  useEffect(() => {
+    //only play Loading animation on first load
+    setTimeout(() => {
+      setFirstLoad(true);
+    }, 4000);
+  }, []);
+
   return (
     <>
       <Head>
@@ -30,6 +43,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     `,
         }}
       />
+      {route.asPath === "/" && !firstLoad ? <Loading /> : null}
       <Component {...pageProps} />
     </>
   );
