@@ -15,6 +15,9 @@ const Loading = ({ ...props }) => {
       let logoWidth = gsap.getProperty("#logo", "width");
       let containerWidth = gsap.getProperty("#container", "width");
 
+      gsap.set("#container", {
+        autoAlpha: 1,
+      });
       gsap.set("#bottom", { visibility: "hidden", opacity: 0 });
       gsap.set("#text", { visibility: "hidden", opacity: 0 });
 
@@ -74,7 +77,7 @@ const Loading = ({ ...props }) => {
         id="backdrop"
         className="font-['organetto'] fixed z-50  w-screen h-screen top-0 left-0 flex items-center justify-center overflow-hidden bg-[#001a28]"
       >
-        <div id="container" className="flex gap-4">
+        <div id="container" className="flex gap-4 invisible">
           <svg
             id="logo"
             xmlns="http://www.w3.org/2000/svg"
