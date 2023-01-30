@@ -62,7 +62,7 @@ const CameraController = ({
 
     return () => {
       controls.dispose();
-      heroRef.current?.removeEventListener("mousemove", changeCursorCords);
+      heroRef?.current?.removeEventListener("mousemove", changeCursorCords);
     };
   }, [camera, gl, viewport]);
   return null;
