@@ -59,7 +59,7 @@ const CameraController = ({
 
     return () => {
       controls.dispose();
-      canvasRef.current.removeEventListener("mousemove", changeCursorCords);
+      canvasRef.current?.removeEventListener("mousemove", changeCursorCords);
     };
   }, [camera, gl, viewport]);
 
