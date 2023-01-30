@@ -3,7 +3,7 @@ import { Ref, useEffect, useLayoutEffect, useRef, useContext } from "react";
 import { gsap, SplitText } from "../utils/gsap";
 import InitialLoadContext from "../store/initialLoad-context";
 
-type CallbackType = (animation: GSAPTimeline, index: number) => void;
+type CallbackType = (animation?: GSAPTimeline, index?: number) => void;
 
 const Loading = ({
   addAnimation,
