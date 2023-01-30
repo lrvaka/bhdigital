@@ -55,14 +55,14 @@ const CameraController = ({
     sizes.height = viewport.height * viewport.factor;
 
     if (heroRef && heroRef.current) {
-      heroRef.current.addEventListener("mousemove", changeCursorCords);
+      heroRef.current?.addEventListener("mousemove", changeCursorCords);
     }
 
     controls.enabled = false;
 
     return () => {
       controls.dispose();
-      heroRef.current.removeEventListener("mousemove", changeCursorCords);
+      heroRef.current?.removeEventListener("mousemove", changeCursorCords);
     };
   }, [camera, gl, viewport]);
   return null;
