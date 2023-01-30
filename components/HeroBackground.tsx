@@ -28,7 +28,7 @@ interface HeroBackgroundProps {
 const CameraController = ({
   heroRef,
 }: {
-  heroRef: RefObject<HTMLDivElement>;
+  heroRef: RefObject<HTMLDivElement> | undefined;
 }) => {
   const { camera, gl } = useThree();
   const viewport = useThree((state) => state.viewport);
@@ -74,10 +74,10 @@ function Box({
   setIsOpen,
   position,
 }: {
-  addAnimation: CallbackType;
-  setIsOpen: (value: boolean) => void;
-  isOpen: boolean;
-  position: [number, number, number];
+  addAnimation?: CallbackType;
+  setIsOpen?: (value: boolean) => void;
+  isOpen?: boolean;
+  position?: [number, number, number];
 }) {
   const [matcap1] = useTexture(["./matcap1.png"]);
 
@@ -94,13 +94,13 @@ function Box({
 
     animation.call(
       () => {
-        setIsOpen(true);
+        if (setIsOpen) setIsOpen(true);
       },
       [],
       "-=7.5"
     );
 
-    addAnimation(animation, ">");
+    if (addAnimation) addAnimation(animation, ">");
 
     return () => ctx.revert(); // cleanup
   }, []);
