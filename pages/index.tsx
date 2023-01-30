@@ -1,5 +1,9 @@
 import type { NextPage } from "next";
+import { useRef } from "react";
 import HeroBackground from "../components/HeroBackground";
+import useIsomorphicLayoutEffect from "../hooks/useIsomorphicLayoutEffect";
+import { useState, useCallback } from "react";
+import gsap from "gsap";
 
 import Hero from "../components/Hero";
 import Footer from "../components/Footer";
@@ -10,6 +14,12 @@ import ExtraFeatures from "../components/ExtraFeatures";
 import Testimonial from "../components/Testimonial";
 import Head from "../components/ui/Head";
 import Navbar from "../components/Navbar";
+
+import NewsletterModal from "../components/NewsletterModal";
+import Loading from "../components/Loading";
+import Works from "../components/Works";
+
+type CallbackType = (animation: GSAPTimeline, index: number | string) => void;
 
 const meta = {
   title:
@@ -22,27 +32,61 @@ const meta = {
   imageAlt: "Blockhead Digital",
 };
 
-const Home: NextPage = () => {
+export default function Home({ firstLoad }: { firstLoad: boolean }) {
+  let [isOpen, setIsOpen] = useState(false);
+  const heroRef = useRef<HTMLDivElement>(null);
+
+  // define a timeline
+  const [tl, setTl] = useState<GSAPTimeline>();
+  // pass a callback to child elements, this will add animations to the timeline
+
+  useIsomorphicLayoutEffect(() => {
+    const ctx = gsap.context(() => {
+      const tl = gsap.timeline();
+      setTl(tl);
+    });
+    return () => ctx.revert();
+  }, []);
+
+  const addAnimation = useCallback<CallbackType>(
+    (animation: GSAPTimeline, index: number | string) => {
+      tl && tl.add(animation, index);
+    },
+    [tl]
+  );
+
   return (
     <>
-      <Head heading={meta} />
+      {!firstLoad ? (
+        <Loading
+          addAnimation={addAnimation}
+          isOpen={isOpen}
+          setIsOpen={setIsOpen}
+        />
+      ) : null}
 
-      <div className="font-bebas">
-        <div className="relative">
+      <Head heading={meta} />
+      <NewsletterModal isOpen={isOpen} setIsOpen={setIsOpen} />
+      <main>
+        <div className="relative" ref={heroRef}>
           <Navbar />
-          <HeroBackground />
+          <HeroBackground
+            heroRef={heroRef}
+            addAnimation={addAnimation}
+            isOpen={isOpen}
+            setIsOpen={setIsOpen}
+          />
 
           <Hero />
         </div>
-        <Features />
+        <Works />
+        {/* <Features /> */}
         <CTA />
         <Testimonial />
         <ExtraFeatures />
         <Form />
-        <Footer />
-      </div>
+      </main>
+      <Footer />
     </>
   );
-};
-
-export default Home;
+}

@@ -1,0 +1,245 @@
+import WorksCube from "./WorksCube";
+import ewfScreenshot from "../public/works/ewf-screenshot.png";
+import fiScreenshot from "../public/works/fi-screenshot.png";
+import catScreenshot from "../public/works/cat-screenshot.png";
+import ewfLogo from "../public/logos/ewfLogo.png";
+import fiLogo from "../public/logos/fiLogo.png";
+import catLogo from "../public/logos/catLogo.svg";
+import Image from "next/image";
+import { useEffect, useLayoutEffect, useRef } from "react";
+import { gsap, ScrollTrigger } from "../utils/gsap";
+
+const worksList = [
+  {
+    name: "Exquisite Wood Floors",
+    services: [
+      "Web Design/Dev",
+      "Paid Ads",
+      "Social Media Management",
+      "Branding",
+    ],
+    desc: "We gave the wood flooring company a polished and professional digital makeover, nailing the perfect balance of style and functionality in the website, crafting engaging social media content and using targeted paid ads to reach the right audience.",
+    matCap: "./matcaps/ewfMat.png",
+    decal: "./logos/ewfLogo.png",
+    screenshot: ewfScreenshot,
+    url: "https://www.exquisitewoodfloors.com/",
+    logo: ewfLogo,
+    bgColor:
+      "bg-[conic-gradient(at_bottom_right,_var(--tw-gradient-stops))] from-teal-800 via-amber-200 to-green-900",
+  },
+  {
+    name: "Finnish Interiors",
+    services: ["Web Design/Dev", "Social Media Management", "Branding"],
+    desc: "With a beautifully crafted website, expertly managed social media channels and a fresh new brand, Blockhead Digital helped this interior contracting company soar to new heights, leaving a lasting impression on their clients and competitors alike.",
+    matCap: "./matcaps/fiMat.png",
+    decal: "./logos/fiLogo.png",
+    screenshot: fiScreenshot,
+    url: "https://finnish-interiors.vercel.app/",
+    logo: fiLogo,
+    bgColor:
+      "bg-[conic-gradient(at_bottom_right,_var(--tw-gradient-stops))] from-white via-yellow-400 to-yellow-200",
+  },
+  {
+    name: "CatMobStaz",
+    services: ["Web Design/Dev", "Social Media Management", "Branding"],
+    desc: "Our team successfully enhanced CatMobStaz's digital presence through web design/development, social media management, and branding, resulting in a sleek website and strong social media presence that showcases their purrfect NFTs.",
+    matCap: "./matcaps/mobMat.png",
+    decal: "./logos/catLogo.svg",
+    screenshot: catScreenshot,
+    url: "https://www.catmobstaz.com/",
+    logo: catLogo,
+    bgColor:
+      "bg-[conic-gradient(at_bottom_right,_var(--tw-gradient-stops))] from-rose-800 via-pink-300 to-rose-800",
+  },
+];
+
+const Works = () => {
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    let ctx = gsap.context(() => {
+      worksList.forEach((e, i) => {
+        gsap.to("#screenshot" + i, {
+          yPercent: 50,
+          ease: "none",
+          scrollTrigger: {
+            trigger: "#item" + i,
+            start: "top bottom", // the default values
+            end: "bottom top",
+            scrub: true,
+          },
+        });
+
+        gsap.to("#logo" + i, {
+          scale: 2,
+          ease: "none",
+          scrollTrigger: {
+            trigger: "#item" + i,
+            start: "top bottom", // the default values
+            end: "bottom top",
+            scrub: true,
+          },
+        });
+
+        gsap.to("#cube" + i, {
+          opacity: 0,
+          ease: "none",
+          scrollTrigger: {
+            trigger: "#item" + i,
+            start: "top center", // the default values
+            end: "center center",
+            scrub: true,
+          },
+        });
+
+        // clip-path: polygon(0 0, 200% 0, 0 200%),
+
+        gsap.fromTo(
+          "#image-cover" + i,
+          {
+            clipPath: "polygon(0 0, 200% 0, 0 200%)",
+            ease: "power4.easeInOut",
+            scrollTrigger: {
+              trigger: "#item" + i,
+            },
+          },
+          {
+            clipPath: "polygon(0 0, 0% 0, 0 0%)",
+          }
+        );
+      });
+    }, containerRef);
+
+    return () => {
+      ctx.revert();
+    };
+  }, []);
+
+  useEffect(() => {
+    let mm = gsap.matchMedia(containerRef);
+
+    mm.add("(min-width: 1024px)", (context) => {
+      const cards = gsap.utils.toArray(["#item0", "#item1", "#item2"]);
+      const cardHeight = gsap.getProperty("#item0", "height");
+      console.log(cards);
+      const spacer = 20;
+      const minScale = 0.8;
+
+      const distributor = gsap.utils.distribute({
+        base: minScale,
+        amount: 0.2,
+      });
+
+      cards.forEach((card: any, index: number) => {
+        const scaleVal = distributor(index, cards[index], cards);
+
+        gsap.to(card, {
+          scrollTrigger: {
+            trigger: card,
+            start: `top top`,
+            scrub: true,
+
+            invalidateOnRefresh: true,
+          },
+          ease: "none",
+          scale: scaleVal,
+        });
+
+        ScrollTrigger.create({
+          trigger: card,
+          start: `top-=${index * spacer} top`,
+          endTrigger: containerRef.current,
+          end: `bottom top+=${+cardHeight + cards.length * spacer}`,
+          pin: true,
+          pinSpacing: false,
+
+          id: "pin",
+          invalidateOnRefresh: true,
+        });
+      });
+    });
+    return () => {
+      mm.revert();
+    };
+  }, []);
+
+  return (
+    <div className="py-16 lg:py-24">
+      <div
+        ref={containerRef}
+        className="grid grid-row-3 max-w-6xl mx-auto gap-5 px-2 lg:px-0"
+      >
+        {worksList.map((e, i) => {
+          return (
+            <div
+              id={"item" + i}
+              key={i + e.name}
+              className={
+                i % 2 === 0
+                  ? "bg-gray-800 border border-gray-700 text-white  relative flex flex-col lg:flex-row p-6 lg:p-10 flex-grow"
+                  : "bg-gray-800 border border-gray-700 text-white  relative flex flex-col p-6 lg:p-10 lg:flex-row-reverse flex-grow"
+              }
+            >
+              <div id="works-img" className="h-[400px] lg:h-full lg:w-2/3 mb-5">
+                <div
+                  id={"img-container" + i}
+                  className={
+                    e.bgColor +
+                    " border border-gray-700 h-full rounded-lg overflow-hidden relative"
+                  }
+                >
+                  <div
+                    id={"image-cover" + i}
+                    className="h-full w-full bg-gray-800 relative z-10"
+                  ></div>
+
+                  <Image
+                    id={"logo" + i}
+                    src={e.logo}
+                    alt={e.logo + i}
+                    className="absolute w-44 -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 opacity-100"
+                  />
+                  {/* <WorksCube name={"cube" + i} matCap={e.matCap} /> */}
+                  {/* <Image
+                    id={"screenshot" + i}
+                    alt="ewf website"
+                    src={e.screenshot}
+                    className=" w-9/12 sm:w-4/12 lg:w-5/6 mx-auto"
+                  /> */}
+                </div>
+              </div>
+              <div className="w-full px-2 lg:px-10 flex flex-col lg:h-full">
+                <ul className="flex gap-2 mb-8 lg:mb-16 flex-wrap">
+                  {e.services.map((service, i) => {
+                    return (
+                      <li
+                        key={service + i}
+                        className="text-gray-100 text-center bg-rose-700 px-3 rounded-sm max-w-max text-md uppercase font-bold"
+                      >
+                        {service}
+                      </li>
+                    );
+                  })}
+                </ul>
+                <div className=" lg:flex-grow mb-10">
+                  <h3 className="text-3xl lg:text-6xl font-bold mb-7 lg:mb-10 after:block after:w-full after:border-b after:h-5 after:border-b-rose-900">
+                    {e.name}
+                  </h3>
+                  <p className="text-lg lg:text-2xl text-gray-300">{e.desc}</p>
+                </div>
+
+                <button className=" transition-all text-2xl lg:text-3xl w-max self-center font-semibold uppercase text-rose-800 bg-rose-200 rounded-sm p-2 border border-gray-700 hover:text-rose-200 hover:bg-rose-700">
+                  <a target="_blank" rel="noreferrer" href={e.url}>
+                    Visit Website
+                  </a>
+                </button>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+};
+
+export default Works;

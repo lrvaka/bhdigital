@@ -12,8 +12,7 @@ export default function Hero() {
               Appointments For Construction Businesses
             </h1> */}
             <h1 className="text-4xl font-bold tracking-tight sm:text-center sm:text-6xl">
-              Digital Marketing for Businesses <br /> Boost Your Online Presence
-              and Attract More Leads
+              Maximize Your Digital Reach and Elevate Your Brand With Our 1:1 Digital Growth Partnership
             </h1>
             <p className="mt-6 text-lg leading-8 text-gray-100 sm:text-center">
               Stop buying low quality traffic from agencies that sell you
@@ -24,7 +23,7 @@ export default function Hero() {
             <div className="mt-8 flex gap-x-4 sm:justify-center">
               <a
                 href="#form"
-                className="inline-block rounded-lg bg-rose-600 px-4 py-1.5 text-base font-semibold leading-7 text-white shadow-sm ring-1 ring-rose-600 hover:bg-rose-700 hover:ring-rose-700"
+                className="inline-block rounded-sm bg-rose-600 px-4 py-1.5 text-base font-semibold leading-7 text-white shadow-sm ring-1 ring-rose-600 hover:bg-rose-700 hover:ring-rose-700"
               >
                 Get started
                 <span className="text-rose-200" aria-hidden="true">

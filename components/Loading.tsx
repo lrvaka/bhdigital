@@ -1,15 +1,30 @@
 import { useIsomorphicLayoutEffect } from "@react-three/fiber/dist/declarations/src/core/utils";
-import { Ref, useEffect, useLayoutEffect, useRef } from "react";
+import { Ref, useEffect, useLayoutEffect, useRef, useContext } from "react";
 import { gsap, SplitText } from "../utils/gsap";
+import InitialLoadContext from "../store/initialLoad-context";
 
-const Loading = ({ ...props }) => {
+type CallbackType = (animation: GSAPTimeline, index: number) => void;
+
+const Loading = ({
+  addAnimation,
+  setIsOpen,
+  isOpen,
+  ...props
+}: {
+  addAnimation: CallbackType;
+  setIsOpen: (value: boolean) => void;
+  isOpen: boolean;
+}) => {
   const logo = useRef<SVGSVGElement>(null);
   const container = useRef<HTMLDivElement | null>(null);
   const tl = useRef<GSAPTimeline>();
+  const { setFirstLoad } = useContext(InitialLoadContext);
 
   useEffect(() => {
     // Note that ref.current may be null. This is expected, because you may
     // conditionally render the ref-ed element, or you may forgot to assign it
+
+    let animation = gsap.timeline();
 
     let ctx = gsap.context(() => {
       let logoWidth = gsap.getProperty("#logo", "width");
@@ -25,7 +40,7 @@ const Loading = ({ ...props }) => {
         type: "words,chars,lines",
       });
 
-      tl.current = gsap
+      animation = gsap
         .timeline()
         .fromTo(
           "#top",
@@ -59,13 +74,23 @@ const Loading = ({ ...props }) => {
         .to("#backdrop", { y: "100%", duration: 0.75, ease: "power4.in" })
         .to(
           "#backdrop-white",
-          { y: "100%", duration: 0.75, ease: "power4.in" },
+          {
+            y: "100%",
+            duration: 0.75,
+            ease: "power4.in",
+            onComplete: () => {
+              setFirstLoad(true);
+            },
+          },
           "-=0.5"
         );
+
     }, container); // <- IMPORTANT! Scopes selector text
 
+    addAnimation(animation, 0);
+
     return () => ctx.revert(); // cleanup
-  }, []); // <- empty dependency Array so it doesn't re-run on every render
+  }, [addAnimation, setFirstLoad]); // <- empty dependency Array so it doesn't re-run on every render
 
   return (
     <div ref={container}>
@@ -75,7 +100,7 @@ const Loading = ({ ...props }) => {
       ></div>
       <div
         id="backdrop"
-        className="font-['organetto'] fixed z-50  w-screen h-screen top-0 left-0 flex items-center justify-center overflow-hidden bg-[#001a28]"
+        className="font-['organetto'] fixed z-50  w-screen h-screen top-0 left-0 flex items-center justify-center overflow-hidden bg-gray-900"
       >
         <div id="container" className="flex gap-4 invisible">
           <svg

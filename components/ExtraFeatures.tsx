@@ -2,6 +2,16 @@ import { CheckIcon } from "@heroicons/react/24/outline";
 
 const features = [
   {
+    name: "Web Design & Dev",
+    description:
+      "Blockhead Digital has a deep understanding of web design & development - we'll transform your website, your hub for all digital traffic.",
+  },
+  {
+    name: "Social Media Management",
+    description:
+      "We create beautiful graphic designs for your social media accounts & have your accounts posting on a consistent basis to elevate your brand awareness.",
+  },
+  {
     name: "Paid Ads",
     description:
       "We run highly optimized & converting paid advertisements on platforms like Google & Facebook that generate qualified leads & sales appointments.",
@@ -11,11 +21,7 @@ const features = [
     description:
       "We'll create a full-fledged backend CRM for you to manage your new leads and help you convert them into high converting, qualified sales appointments!",
   },
-  {
-    name: "Web Design & Dev",
-    description:
-      "Blockhead Digital has a deep understanding of web design & development - we'll transform your website, your hub for all digital traffic.",
-  },
+
   {
     name: "SEO",
     description:
@@ -25,12 +31,6 @@ const features = [
     name: "Branding",
     description:
       "We help you develop branding for your company! We help define branding strategy, color palette, tone of voice, typography, imagery & more!",
-  },
-
-  {
-    name: "Social Media Management",
-    description:
-      "We create beautiful graphic designs for your social media accounts & have your accounts posting on a consistent basis to elevate your brand awareness.",
   },
 ];
 

@@ -6,17 +6,15 @@ import Head from "next/head";
 import Loading from "../components/Loading";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+import InitialLoadContext from "../store/initialLoad-context";
+
+if (typeof window !== "undefined") {
+  window.history.scrollRestoration = "manual";
+}
 
 function MyApp({ Component, pageProps }: AppProps) {
   const route = useRouter();
   const [firstLoad, setFirstLoad] = useState(false);
-
-  useEffect(() => {
-    //only play Loading animation on first load
-    setTimeout(() => {
-      setFirstLoad(true);
-    }, 10000);
-  }, []);
 
   return (
     <>
@@ -43,8 +41,14 @@ function MyApp({ Component, pageProps }: AppProps) {
     `,
         }}
       />
-      {route.asPath.includes("/") && !firstLoad ? <Loading /> : null}
-      <Component {...pageProps} />
+      <InitialLoadContext.Provider
+        value={{
+          firstLoad,
+          setFirstLoad,
+        }}
+      >
+        <Component firstLoad={firstLoad} {...pageProps} />
+      </InitialLoadContext.Provider>
     </>
   );
 }

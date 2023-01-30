@@ -1,17 +1,34 @@
 import {
   useRef,
   useState,
+  useContext,
   useEffect,
   ReactEventHandler,
   MouseEventHandler,
+  MutableRefObject,
 } from "react";
+import InitialLoadContext from "../store/initialLoad-context";
 import { Canvas, ThreeElements, useFrame, useThree } from "@react-three/fiber";
 import { CanvasTexture, Mesh } from "three";
 import { useTexture, RoundedBox } from "@react-three/drei";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import { gsap, SplitText } from "../utils/gsap";
 
-const CameraController = () => {
+type CallbackType = (animation: GSAPTimeline, index: number | string) => void;
+
+interface HeroBackgroundProps {
+  landingPage?: Boolean;
+  addAnimation: CallbackType;
+  setIsOpen: (value: boolean) => void;
+  isOpen: boolean;
+  heroRef: MutableRefObject<HTMLDivElement>;
+}
+
+const CameraController = ({
+  heroRef,
+}: {
+  heroRef: MutableRefObject<HTMLDivElement>;
+}) => {
   const { camera, gl } = useThree();
   const viewport = useThree((state) => state.viewport);
 
@@ -36,28 +53,53 @@ const CameraController = () => {
     sizes.width = viewport.width * viewport.factor;
     sizes.height = viewport.height * viewport.factor;
 
-    window.addEventListener("mousemove", changeCursorCords);
+    if (heroRef && heroRef.current) {
+      heroRef.current.addEventListener("mousemove", changeCursorCords);
+    }
 
     controls.enabled = false;
 
     return () => {
       controls.dispose();
-      window.removeEventListener("mousemove", changeCursorCords);
+      heroRef.current.removeEventListener("mousemove", changeCursorCords);
     };
   }, [camera, gl, viewport]);
   return null;
 };
 
-function Box({ ...props }) {
+function Box({
+  addAnimation,
+  isOpen,
+  setIsOpen,
+  position,
+}: {
+  addAnimation: CallbackType;
+  setIsOpen: (value: boolean) => void;
+  isOpen: boolean;
+  position: [number, number, number];
+}) {
   const [matcap1] = useTexture(["./matcap1.png"]);
 
   const ref = useRef<Mesh>(null!);
 
   useEffect(() => {
-    console.log(ref.current);
+    let animation = gsap.timeline();
+
     let ctx = gsap.context(() => {
-      gsap.from(ref.current.scale, { duration: 10, x: 0, y: 0 });
+      animation = gsap
+        .timeline()
+        .from(ref.current.scale, { duration: 10, x: 0.5, y: 0.5 });
     }, ref);
+
+    animation.call(
+      () => {
+        setIsOpen(true);
+      },
+      [],
+      "-=7.5"
+    );
+
+    addAnimation(animation, ">");
 
     return () => ctx.revert(); // cleanup
   }, []);
@@ -68,7 +110,7 @@ function Box({ ...props }) {
   });
 
   return (
-    <mesh {...props} ref={ref}>
+    <mesh position={position} ref={ref}>
       <RoundedBox args={[2, 2, 2]} radius={0.25} smoothness={25}>
         <meshMatcapMaterial matcap={matcap1} />
       </RoundedBox>
@@ -76,15 +118,22 @@ function Box({ ...props }) {
   );
 }
 
-interface HeroBackgroundProps {
-  landingPage?: Boolean;
-}
-
-export default function HeroBackground({ landingPage }: HeroBackgroundProps) {
+export default function HeroBackground({
+  landingPage,
+  addAnimation,
+  isOpen,
+  setIsOpen,
+  heroRef,
+}: HeroBackgroundProps) {
   return (
     <Canvas style={{ position: "absolute" }} className="absolute top-0 left-0">
-      <CameraController />
-      <Box position={landingPage ? [-0.5, 0, 2] : [1, 0.5, 2]} />
+      <CameraController heroRef={heroRef} />
+      <Box
+        isOpen={isOpen}
+        setIsOpen={setIsOpen}
+        addAnimation={addAnimation}
+        position={landingPage ? [-0.5, 0, 2] : [1, 0.5, 2]}
+      />
     </Canvas>
   );
 }
