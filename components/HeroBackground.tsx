@@ -6,6 +6,7 @@ import {
   ReactEventHandler,
   MouseEventHandler,
   MutableRefObject,
+  RefObject,
 } from "react";
 import InitialLoadContext from "../store/initialLoad-context";
 import { Canvas, ThreeElements, useFrame, useThree } from "@react-three/fiber";
@@ -21,13 +22,13 @@ interface HeroBackgroundProps {
   addAnimation: CallbackType;
   setIsOpen: (value: boolean) => void;
   isOpen: boolean;
-  heroRef: MutableRefObject<HTMLDivElement>;
+  heroRef: RefObject<HTMLDivElement>;
 }
 
 const CameraController = ({
   heroRef,
 }: {
-  heroRef: MutableRefObject<HTMLDivElement>;
+  heroRef: RefObject<HTMLDivElement>;
 }) => {
   const { camera, gl } = useThree();
   const viewport = useThree((state) => state.viewport);
