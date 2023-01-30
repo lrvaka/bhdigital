@@ -1,7 +1,7 @@
-const Image = () => {
-  return;
-};
+// const Image = () => {
+//   return;
+// };
 
-const MDXComponents = {
-  Image,
-};
+// const MDXComponents = {
+//   Image,
+// };
