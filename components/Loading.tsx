@@ -84,10 +84,11 @@ const Loading = ({
           },
           "-=0.5"
         );
-
     }, container); // <- IMPORTANT! Scopes selector text
 
-    addAnimation(animation, 0);
+    if (addAnimation) {
+      addAnimation(animation, 0);
+    }
 
     return () => ctx.revert(); // cleanup
   }, [addAnimation, setFirstLoad]); // <- empty dependency Array so it doesn't re-run on every render
