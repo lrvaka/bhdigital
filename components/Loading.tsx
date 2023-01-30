@@ -11,9 +11,9 @@ const Loading = ({
   isOpen,
   ...props
 }: {
-  addAnimation: CallbackType;
-  setIsOpen: (value: boolean) => void;
-  isOpen: boolean;
+  addAnimation?: CallbackType;
+  setIsOpen?: (value: boolean) => void;
+  isOpen?: boolean;
 }) => {
   const logo = useRef<SVGSVGElement>(null);
   const container = useRef<HTMLDivElement | null>(null);
