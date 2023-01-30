@@ -19,10 +19,10 @@ type CallbackType = (animation: GSAPTimeline, index: number | string) => void;
 
 interface HeroBackgroundProps {
   landingPage?: Boolean;
-  addAnimation: CallbackType;
-  setIsOpen: (value: boolean) => void;
-  isOpen: boolean;
-  heroRef: RefObject<HTMLDivElement>;
+  addAnimation?: CallbackType;
+  setIsOpen?: (value: boolean) => void;
+  isOpen?: boolean;
+  heroRef?: RefObject<HTMLDivElement>;
 }
 
 const CameraController = ({
