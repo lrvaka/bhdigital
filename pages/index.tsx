@@ -66,7 +66,7 @@ export default function Home({ firstLoad }: { firstLoad: boolean }) {
       ) : null}
 
       <Head heading={meta} />
-      <NewsletterModal isOpen={isOpen} setIsOpen={setIsOpen} />
+      {/* <NewsletterModal isOpen={isOpen} setIsOpen={setIsOpen} /> */}
       <main>
         <div className="relative" ref={heroRef}>
           <Navbar />
