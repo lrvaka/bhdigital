@@ -35,6 +35,7 @@ const worksList = [
     decal: "./logos/fiLogo.png",
     screenshot: fiScreenshot,
     url: "https://finnish-interiors.vercel.app/",
+    comingSoon: true,
     logo: fiLogo,
     bgColor:
       "bg-[conic-gradient(at_bottom_right,_var(--tw-gradient-stops))] from-white via-yellow-400 to-yellow-200",
@@ -229,9 +230,13 @@ const Works = () => {
                 </div>
 
                 <button className=" transition-all text-2xl lg:text-3xl w-max self-center font-semibold uppercase text-rose-800 bg-rose-200 rounded-sm p-2 border border-gray-700 hover:text-rose-200 hover:bg-rose-700">
-                  <a target="_blank" rel="noreferrer" href={e.url}>
-                    Visit Website
-                  </a>
+                  {e.comingSoon ? (
+                    "Coming Soon"
+                  ) : (
+                    <a target="_blank" rel="noreferrer" href={e.url}>
+                      Visit Website
+                    </a>
+                  )}
                 </button>
               </div>
             </div>
