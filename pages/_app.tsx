@@ -3,7 +3,7 @@ import type { AppProps } from "next/app";
 import * as fbq from "../lib/fpixel";
 import Script from "next/script";
 import Head from "next/head";
-import Loading from "../components/Loading";
+import * as gtag from "../lib/gtag";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import InitialLoadContext from "../store/initialLoad-context";
@@ -13,8 +13,20 @@ if (typeof window !== "undefined") {
 }
 
 function MyApp({ Component, pageProps }: AppProps) {
-  const route = useRouter();
+  const router = useRouter();
   const [firstLoad, setFirstLoad] = useState(false);
+
+  useEffect(() => {
+    const handleRouteChange = (url) => {
+      gtag.pageview(url);
+    };
+    router.events.on("routeChangeComplete", handleRouteChange);
+    router.events.on("hashChangeComplete", handleRouteChange);
+    return () => {
+      router.events.off("routeChangeComplete", handleRouteChange);
+      router.events.off("hashChangeComplete", handleRouteChange);
+    };
+  }, [router.events]);
 
   return (
     <>
@@ -39,6 +51,25 @@ function MyApp({ Component, pageProps }: AppProps) {
       'https://connect.facebook.net/en_US/fbevents.js');
       fbq('init', ${fbq.FB_PIXEL_ID});
     `,
+        }}
+      />
+      {/* Global Site Tag (gtag.js) - Google Analytics */}
+      <Script
+        strategy="afterInteractive"
+        src={`https://www.googletagmanager.com/gtag/js?id=${gtag.GA_TRACKING_ID}`}
+      />
+      <Script
+        id="gtag-init"
+        strategy="afterInteractive"
+        dangerouslySetInnerHTML={{
+          __html: `
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', '${gtag.GA_TRACKING_ID}', {
+              page_path: window.location.pathname,
+            });
+          `,
         }}
       />
       <InitialLoadContext.Provider
