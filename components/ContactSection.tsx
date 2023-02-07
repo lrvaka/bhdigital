@@ -72,7 +72,7 @@ export default function Example() {
                 className="h-6 w-6 flex-shrink-0 text-gray-400"
                 aria-hidden="true"
               />
-              <span className="ml-3">+1 (555) 123-4567</span>
+              <span className="ml-3">+1 (917) 524-7749</span>
             </dd>
           </div>
           <div className="mt-3">

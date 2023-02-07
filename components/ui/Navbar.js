@@ -34,12 +34,12 @@ const Navbar = () => {
             </Link>
           </li>
         </ul>
-        <a
-          href="#form"
+        <Link
+          href="/#form"
           className=" inline-block border-rose-600 px-4 py-1.5 text-base font-semibold leading-7 text-white shadow-sm ring-1 ring-rose-600 hover:bg-rose-700 hover:ring-rose-700 uppercase lg:text-xl"
         >
           Get in touch
-        </a>
+        </Link>
       </nav>
     </header>
   );
