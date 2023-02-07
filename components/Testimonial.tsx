@@ -47,8 +47,8 @@ export default function Testimonial() {
             <Image src={ewfLogo} alt="exquisite wood floors" />
           </div>
 
-          <blockquote className="mt-10">
-            <div className="mx-auto max-w-3xl text-center text-2xl font-medium leading-9 text-gray-300">
+          <blockquote className="mt-5 lg:mt-10">
+            <div className="mx-auto max-w-3xl text-center text-lg lg:text-2xl font-medium text-gray-300">
               <p>
                 &ldquo;Blockhead Digital elevated the digital presence of my
                 company in every aspect - I recommend them to anyone looking to
@@ -67,7 +67,7 @@ export default function Testimonial() {
                   </div>
                 </div>
                 <div className="mt-3 text-center md:mt-0 md:ml-4 md:flex md:items-center">
-                  <div className="text-base font-medium text-gray-100">
+                  <div className="uppercase text-base font-medium text-gray-100">
                     Brian Fingleton
                   </div>
 
@@ -79,7 +79,7 @@ export default function Testimonial() {
                     <path d="M11 0h3L9 20H6l5-20z" />
                   </svg>
 
-                  <div className="text-base font-medium text-gray-300">
+                  <div className="uppercase text-base font-medium text-gray-300">
                     Founder, Exquisite Wood Floors
                   </div>
                 </div>

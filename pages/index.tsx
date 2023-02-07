@@ -10,27 +10,17 @@ import Footer from "../components/Footer";
 import CTA from "../components/CTA";
 import Form from "../components/Form/Form";
 import Features from "../components/Features";
+import ContactSection from "../components/ContactSection";
 import ExtraFeatures from "../components/ExtraFeatures";
 import Testimonial from "../components/Testimonial";
-import Head from "../components/ui/Head";
-import Navbar from "../components/Navbar";
+import Container from "../components/ui/Container";
+import Navbar from "../components/ui/Navbar";
 
 import NewsletterModal from "../components/NewsletterModal";
 import Loading from "../components/Loading";
 import Works from "../components/Works";
 
 type CallbackType = (animation: GSAPTimeline, index: number | string) => void;
-
-const meta = {
-  title:
-    "Blockhead Digital - Digital Marketing for Businesses | Boost Your Online Presence and Attract More Leads",
-  description:
-    "Maximize your online presence and increase leads with our specialized digital marketing services for construction companies. From SEO to social media, we have the tools and expertise to drive results for your business.",
-  url: "https://www.blockhead.digital",
-  twitter: "https://twitter.com/bh_digital_",
-  imageUrl: "https://www.blockhead.digital/images/twitter.png",
-  imageAlt: "Blockhead Digital",
-};
 
 export default function Home({ firstLoad }: { firstLoad: boolean }) {
   let [isOpen, setIsOpen] = useState(false);
@@ -65,11 +55,10 @@ export default function Home({ firstLoad }: { firstLoad: boolean }) {
         />
       ) : null}
 
-      <Head heading={meta} />
-      {/* <NewsletterModal isOpen={isOpen} setIsOpen={setIsOpen} /> */}
-      <main>
+      <Container>
+        {/* <NewsletterModal isOpen={isOpen} setIsOpen={setIsOpen} /> */}
         <div className="relative" ref={heroRef}>
-          <Navbar />
+      
           <HeroBackground
             heroRef={heroRef}
             addAnimation={addAnimation}
@@ -84,9 +73,9 @@ export default function Home({ firstLoad }: { firstLoad: boolean }) {
         <CTA />
         <Testimonial />
         <ExtraFeatures />
-        <Form />
-      </main>
-      <Footer />
+        <ContactSection />
+        {/* <Form /> */}
+      </Container>
     </>
   );
 }

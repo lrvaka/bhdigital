@@ -39,16 +39,16 @@ export default function ExtraFeatures() {
     <div className="bg-white">
       <div className="mx-auto max-w-7xl py-24 px-6 sm:py-32 lg:grid lg:grid-cols-3 lg:gap-x-12 lg:px-8 lg:py-40">
         <div>
-          <h2 className="text-lg font-semibold leading-8 tracking-tight text-rose-600">
+          <h2 className="uppercase text-lg font-semibold leading-8 tracking-tight text-rose-600">
             Everything you need
           </h2>
-          <p className="mt-2 text-4xl font-bold tracking-tight text-gray-900">
-            All-in-one agency
+          <p className="uppercase mt-2 text-4xl font-bold tracking-tight text-gray-900">
+            Custom Solutions
           </p>
           <p className="mt-6 text-base leading-7 text-gray-600">
-            Generating you sales appointments is our bread and butter - but the
-            benefits don&apos;t end there. We offer a variety of services to
-            improve your digital presence as a whole!
+            All our solutions are tailored to you and your needs! Here are a few
+            of the services we offer to improve your digital presence as a
+            whole!
           </p>
         </div>
         <div className="mt-20 lg:col-span-2 lg:mt-0">
@@ -60,7 +60,7 @@ export default function ExtraFeatures() {
                     className="absolute mt-1 h-6 w-6 text-rose-600"
                     aria-hidden="true"
                   />
-                  <p className="ml-10 text-lg font-semibold leading-8 text-gray-900">
+                  <p className=" uppercase ml-10 text-lg font-semibold leading-8 text-gray-900">
                     {feature.name}
                   </p>
                 </dt>

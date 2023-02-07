@@ -6,11 +6,7 @@ function PostCard({ title, date, description, slug }) {
       <h2 className="font-bold text-2xl my-4">{title}</h2>
       <time className="text-gray-400">{date}</time>
 
-      <Link
-        href="/blog/[slug]"
-        className="text-blue-500 mt-4 mb-2 block"
-        as={`/blog/${slug}`}
-      >
+      <Link href={`/blog/${slug}`} className="text-blue-500 mt-4 mb-2 block">
         Read more
       </Link>
     </div>

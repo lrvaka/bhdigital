@@ -112,7 +112,7 @@ function Box({
 
   return (
     <mesh position={position} ref={ref}>
-      <RoundedBox args={[2, 2, 2]} radius={0.25} smoothness={25}>
+      <RoundedBox args={[2.5, 2.5, 2.5]} radius={0.25} smoothness={25}>
         <meshMatcapMaterial matcap={matcap1} />
       </RoundedBox>
     </mesh>

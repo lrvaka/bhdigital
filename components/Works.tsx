@@ -200,13 +200,6 @@ const Works = () => {
                     alt={e.logo + i}
                     className="absolute w-44 -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 opacity-100"
                   />
-                  {/* <WorksCube name={"cube" + i} matCap={e.matCap} /> */}
-                  {/* <Image
-                    id={"screenshot" + i}
-                    alt="ewf website"
-                    src={e.screenshot}
-                    className=" w-9/12 sm:w-4/12 lg:w-5/6 mx-auto"
-                  /> */}
                 </div>
               </div>
               <div className="w-full px-2 lg:px-10 flex flex-col lg:h-full">
@@ -215,7 +208,7 @@ const Works = () => {
                     return (
                       <li
                         key={service + i}
-                        className="text-gray-100 text-center bg-rose-700 px-3 rounded-sm max-w-max text-md uppercase font-bold"
+                        className="text-gray-100 text-center bg-rose-700 px-3 max-w-max text-md uppercase font-bold"
                       >
                         {service}
                       </li>
@@ -223,20 +216,16 @@ const Works = () => {
                   })}
                 </ul>
                 <div className=" lg:flex-grow mb-10">
-                  <h3 className="text-3xl lg:text-6xl font-bold mb-7 lg:mb-10 after:block after:w-full after:border-b after:h-5 after:border-b-rose-900">
+                  <h3 className="text-3xl lg:text-6xl font-bold mb-7 after:block after:w-full after:border-b after:h-5 after:border-b-rose-900 uppercase">
                     {e.name}
                   </h3>
                   <p className="text-lg lg:text-2xl text-gray-300">{e.desc}</p>
                 </div>
 
-                <button className=" transition-all text-2xl lg:text-3xl w-max self-center font-semibold uppercase text-rose-800 bg-rose-200 rounded-sm p-2 border border-gray-700 hover:text-rose-200 hover:bg-rose-700">
-                  {e.comingSoon ? (
-                    "Coming Soon"
-                  ) : (
-                    <a target="_blank" rel="noreferrer" href={e.url}>
-                      Visit Website
-                    </a>
-                  )}
+                <button className="inline-block border-rose-600 px-4 py-1.5 text-base font-semibold leading-7 text-white shadow-sm ring-1 ring-rose-600 hover:bg-rose-700 hover:ring-rose-700 uppercase lg:text-xl">
+                  <a target="_blank" rel="noreferrer" href={e.url}>
+                    Visit Website
+                  </a>
                 </button>
               </div>
             </div>

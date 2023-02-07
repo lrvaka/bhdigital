@@ -8,7 +8,7 @@ import Form from "../components/Form/Form";
 import Features from "../components/Features";
 import ExtraFeatures from "../components/ExtraFeatures";
 import Testimonial from "../components/Testimonial";
-import Head from "../components/ui/Head";
+import Head from "../components/ui/Container";
 
 const meta = {
   title: "Blockhead Digital - Work With Us Today!",

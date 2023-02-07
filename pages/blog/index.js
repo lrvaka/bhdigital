@@ -2,13 +2,24 @@ import PostCard from "../../components/PostCard";
 import BlogLayout from "../../components/layouts/BlogLayout";
 import client from "../../helpers/sanity";
 import { parseISO, format } from "date-fns";
+import Container from "../../components/ui/Container";
 
 export default function Blog({ posts }) {
-  console.log(posts);
+  const meta = {
+    title: "Blog - Blockhead Digital",
+    description: "Learn about everything Blockhead Digital and technology",
+  };
+
   return (
-    <BlogLayout>
-      <h1 className="mb-2 font-bold text-5xl">All Posts</h1>
-      <div class="relative max-w-lg">
+    <Container>
+      <div className="pt-32 lg:pt-40 max-w-lg mx-auto px-4 lg-px-4">
+        <h1 className="mb-2 font-bold text-5xl uppercase text-rose-600">
+          All Posts
+        </h1>
+
+        {/* Search bar */}
+
+        {/* <div class="relative max-w-lg">
         <input
           aria-label="Search articles"
           type="text"
@@ -29,21 +40,23 @@ export default function Blog({ posts }) {
             d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
           ></path>
         </svg>
+      </div> */}
+
+        {posts.map((post) => (
+          <PostCard
+            key={post.slug.current}
+            title={post.title}
+            date={format(parseISO(post.publishedAt), "MMMM dd, yyyy")}
+            slug={post.slug.current}
+          />
+        ))}
       </div>
-      {posts.map((post) => (
-        <PostCard
-          key={post.slug.current}
-          title={post.title}
-          date={format(parseISO(post.publishedAt), "MMMM dd, yyyy")}
-          slug={post.slug.current}
-        />
-      ))}
-    </BlogLayout>
+    </Container>
   );
 }
 
 export const getStaticProps = async () => {
-  const posts = await client.fetch(`*[_type == "Blog"]`);
+  const posts = await client.fetch(`*[_type == "blogPost"]`);
 
   return {
     props: {
