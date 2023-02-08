@@ -7,7 +7,7 @@ export default function SiteMap() {
 export async function getServerSideProps({ res }) {
   const posts = await client.fetch(`*[_type == "blogPost"]`);
 
-  const baseUrl = `https://www.blockhead.digital`;
+  const baseUrl = `https://www.blockhead.digital/blog`;
   const defaultUrls = [
     "https://www.blockhead.digital",
     "https://www.blockhead.digital/blog",
