@@ -12,7 +12,7 @@ export default function Blog({ posts }) {
 
   return (
     <Container>
-      <div className="pt-32 lg:pt-40 max-w-lg mx-auto px-4 lg-px-4">
+      <div className="py-32 lg:py-40 max-w-lg mx-auto px-4 lg-px-4">
         <h1 className="mb-2 font-bold text-5xl uppercase text-rose-600">
           All Posts
         </h1>
