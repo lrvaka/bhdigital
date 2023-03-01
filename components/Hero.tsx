@@ -103,28 +103,36 @@ export default function Hero({ addAnimation }: { addAnimation: CallbackType }) {
       <div id="marquee">
         <Marquee className="max-w-6xl mx-auto" gradientColor={[17, 24, 39]}>
           <div className="invert h-10 mx-5 lg:mx-10 ">
-            <Image className="h-full w-full" src={vercelLogo} />
+            <Image alt="vercel" className="h-full w-full" src={vercelLogo} />
           </div>
           <div className=" h-10 mx-5 lg:mx-10 ">
-            <Image height={40} src={sanityLogo} />
+            <Image alt="sanity" height={40} src={sanityLogo} />
           </div>
           <div className="invert h-10 mx-5 lg:mx-10 ">
-            <Image className="h-full w-full" src={nextJSLogo} />
+            <Image alt="nextJS" className="h-full w-full" src={nextJSLogo} />
           </div>
           <div className=" h-10 mx-5 lg:mx-10 ">
-            <Image className="h-full w-full" src={jamstackLogo} />
+            <Image
+              alt="jamstack"
+              className="h-full w-full"
+              src={jamstackLogo}
+            />
           </div>
           <div className="invert h-10 mx-5 lg:mx-10 ">
-            <Image className="h-full w-full" src={vercelLogo} />
+            <Image alt="vercel" className="h-full w-full" src={vercelLogo} />
           </div>
           <div className=" h-10 mx-5 lg:mx-10 ">
-            <Image height={40} src={sanityLogo} />
+            <Image alt="sanity" height={40} src={sanityLogo} />
           </div>
-          <div className="invert h-10  mx-5 lg:mx-10 ">
-            <Image className="h-full w-full" src={nextJSLogo} />
+          <div className="invert h-10 mx-5 lg:mx-10 ">
+            <Image alt="nextJS" className="h-full w-full" src={nextJSLogo} />
           </div>
           <div className=" h-10 mx-5 lg:mx-10 ">
-            <Image className="h-full w-full" src={jamstackLogo} />
+            <Image
+              alt="jamstack"
+              className="h-full w-full"
+              src={jamstackLogo}
+            />
           </div>
         </Marquee>
       </div>
