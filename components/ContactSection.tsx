@@ -57,7 +57,7 @@ export default function Example() {
   return (
     <div className="relative py-40" id="form">
       <div className="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
-        <h2 className="uppercase text-5xl font-bold tracking-tight text-rose-600 lg:text-9xl">
+        <h2 className="uppercase text-5xl font-bold tracking-tight text-rose-500 lg:text-9xl">
           Get in touch
         </h2>
         <p className="mt-3 text-xl lg:text-2xl 2xl:text-3xl leading-6 text-gray-100">

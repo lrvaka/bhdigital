@@ -1,15 +1,14 @@
 import Head from "next/head";
 import PropTypes from "prop-types";
 import { useRouter } from "next/router";
-import Navbar from "./Navbar";
+
 import Footer from "../Footer";
 
 const Container = ({ customMeta, children }: any) => {
   const router = useRouter();
 
   const meta = {
-    title:
-      "Blockhead Digital – 1 to 1 Digital Growth Partners",
+    title: "Blockhead Digital – 1 to 1 Digital Growth Partners",
     description: `Say goodbye to generic strategies and hello to tailored solutions built just for you. Choose a 1 to 1 digital growth partner and unleash your digital potential.`,
     imageUrl: "https://www.blockhead.digital/images/twitter.png",
     type: "website",
@@ -44,7 +43,7 @@ const Container = ({ customMeta, children }: any) => {
           <meta property="article:published_time" content={meta.date} />
         )}
       </Head>
-      <Navbar />
+
       <main className=" min-h-screen">{children}</main>
       <Footer />
     </>

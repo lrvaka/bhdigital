@@ -3,6 +3,7 @@ import BlogLayout from "../../components/layouts/BlogLayout";
 import client from "../../helpers/sanity";
 import { parseISO, format } from "date-fns";
 import Container from "../../components/ui/Container";
+import Navbar from "../../components/ui/Navbar";
 
 export default function Blog({ posts }) {
   const meta = {
@@ -11,22 +12,25 @@ export default function Blog({ posts }) {
   };
 
   return (
-    <Container customMeta={meta}>
-      <div className="py-32 lg:py-40 max-w-lg mx-auto px-4 lg-px-4">
-        <h1 className="mb-2 font-bold text-5xl uppercase text-rose-600">
-          All Posts
-        </h1>
+    <>
+      <Navbar />
+      <Container customMeta={meta}>
+        <div className="py-32 lg:py-40 max-w-lg mx-auto px-4 lg-px-4">
+          <h1 className="mb-2 font-bold text-5xl uppercase text-rose-600">
+            All Posts
+          </h1>
 
-        {posts.map((post) => (
-          <PostCard
-            key={post.slug.current}
-            title={post.title}
-            date={format(parseISO(post.publishedAt), "MMMM dd, yyyy")}
-            slug={post.slug.current}
-          />
-        ))}
-      </div>
-    </Container>
+          {posts.map((post) => (
+            <PostCard
+              key={post.slug.current}
+              title={post.title}
+              date={format(parseISO(post.publishedAt), "MMMM dd, yyyy")}
+              slug={post.slug.current}
+            />
+          ))}
+        </div>
+      </Container>
+    </>
   );
 }
 

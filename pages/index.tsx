@@ -19,6 +19,7 @@ import Navbar from "../components/ui/Navbar";
 import NewsletterModal from "../components/NewsletterModal";
 import Loading from "../components/Loading";
 import Works from "../components/Works";
+import AboutUs from "../components/AboutUs";
 
 type CallbackType = (animation: GSAPTimeline, index: number | string) => void;
 
@@ -27,20 +28,12 @@ export default function Home({ firstLoad }: { firstLoad: boolean }) {
   const heroRef = useRef<HTMLDivElement>(null);
 
   // define a timeline
-  const [tl, setTl] = useState<GSAPTimeline>();
-  // pass a callback to child elements, this will add animations to the timeline
-
-  useIsomorphicLayoutEffect(() => {
-    const ctx = gsap.context(() => {
-      const tl = gsap.timeline();
-      setTl(tl);
-    });
-    return () => ctx.revert();
-  }, []);
+  const [tl, setTl] = useState<GSAPTimeline>(gsap.timeline());
 
   const addAnimation = useCallback<CallbackType>(
     (animation: GSAPTimeline, index: number | string) => {
       tl && tl.add(animation, index);
+      console.log(tl);
     },
     [tl]
   );
@@ -55,10 +48,11 @@ export default function Home({ firstLoad }: { firstLoad: boolean }) {
         />
       ) : null}
 
+      <Navbar addAnimation={addAnimation} />
+
       <Container>
         {/* <NewsletterModal isOpen={isOpen} setIsOpen={setIsOpen} /> */}
         <div className="relative" ref={heroRef}>
-      
           <HeroBackground
             heroRef={heroRef}
             addAnimation={addAnimation}
@@ -66,10 +60,11 @@ export default function Home({ firstLoad }: { firstLoad: boolean }) {
             setIsOpen={setIsOpen}
           />
 
-          <Hero />
+          <Hero addAnimation={addAnimation} />
         </div>
         <Works />
-        {/* <Features /> */}
+        <AboutUs />
+        <Features />
         <CTA />
         <Testimonial />
         <ExtraFeatures />

@@ -7,6 +7,7 @@ import {
   MouseEventHandler,
   MutableRefObject,
   RefObject,
+  useLayoutEffect,
 } from "react";
 import InitialLoadContext from "../store/initialLoad-context";
 import { Canvas, ThreeElements, useFrame, useThree } from "@react-three/fiber";
@@ -84,23 +85,24 @@ function Box({
   const ref = useRef<Mesh>(null!);
 
   useEffect(() => {
-    let animation = gsap.timeline();
-
     let ctx = gsap.context(() => {
-      animation = gsap
-        .timeline()
-        .from(ref.current.scale, { duration: 10, x: 0.5, y: 0.5 });
+      const animation = gsap.timeline().from(ref.current.scale, {
+        duration: 10,
+        x: 0.5,
+        y: 0.5,
+        ease: "power4.easeInOut",
+      });
+
+      animation.call(
+        () => {
+          if (setIsOpen) setIsOpen(true);
+        },
+        [],
+        "-=7.5"
+      );
+
+      if (addAnimation) addAnimation(animation, "end");
     }, ref);
-
-    animation.call(
-      () => {
-        if (setIsOpen) setIsOpen(true);
-      },
-      [],
-      "-=7.5"
-    );
-
-    if (addAnimation) addAnimation(animation, ">");
 
     return () => ctx.revert(); // cleanup
   }, []);

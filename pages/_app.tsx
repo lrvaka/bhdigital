@@ -7,6 +7,7 @@ import * as gtag from "../lib/gtag";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import InitialLoadContext from "../store/initialLoad-context";
+import Navbar from "../components/ui/Navbar";
 
 if (typeof window !== "undefined") {
   window.history.scrollRestoration = "manual";

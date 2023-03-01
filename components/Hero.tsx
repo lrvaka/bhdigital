@@ -1,25 +1,74 @@
-export default function Hero() {
+import Image from "next/image";
+import vercelLogo from "../public/logos/vercel.svg";
+import nextJSLogo from "../public/logos/nextjs.svg";
+import sanityLogo from "../public/logos/sanity.png";
+import jamstackLogo from "../public/logos/jamstack.png";
+import Marquee from "react-fast-marquee";
+import { useRef, useEffect, useLayoutEffect } from "react";
+import { gsap } from "../utils/gsap";
+
+type CallbackType = (animation: GSAPTimeline, index: number | string) => void;
+
+export default function Hero({ addAnimation }: { addAnimation: CallbackType }) {
+  const ref = useRef<HTMLDivElement>(null);
+
+  useLayoutEffect(() => {
+    let animation = gsap.timeline();
+
+    let ctx = gsap.context(() => {
+      gsap.set("#items-container > *", {
+        y: -10,
+        opacity: 0,
+      });
+
+      animation = gsap
+        .timeline()
+        .to("#items-container > *", {
+          duration: 0.75,
+          y: 0,
+          opacity: 1,
+          ease: "back",
+          stagger: 0.25,
+        })
+        .from(
+          "#marquee",
+          {
+            duration: 1,
+            opacity: 0,
+            ease: "back",
+          },
+          "<"
+        );
+    }, ref);
+
+    if (addAnimation) addAnimation(animation, "end");
+
+    return () => ctx.revert(); // cleanup
+  }, []);
+
   return (
-    <div className="relative px-6 lg:px-8 isolate">
-      <div className=" pt-48 pb-40">
-        <div className="flex flex-col max-w-screen-xl mx-auto">
-          <h1 className="text-4xl sm:text-7xl lg:text-8xl 2xl:text-9xl font-bold tracking-tight uppercase  ">
-            Unleash Your Digital <br className="hidden sm:inline" /> Potential
-            with a <br className="hidden sm:inline" /> 1 to 1 Growth Partner
+    <div ref={ref} className="relative px-6 lg:px-8 isolate">
+      <div className=" pt-40 lg:pt-60 pb-40">
+        <div
+          id="items-container"
+          className="flex flex-col max-w-screen-xl mx-auto"
+        >
+          <h1 className="text-6xl sm:text-7xl lg:text-9xl  font-bold tracking-tight  ">
+            Next-Gen Solutions For Your Digital Needs{" "}
           </h1>
-          <p className=" mt-4 text-lg sm:text-2xl lg:text-3xl 2xl:text-4xl text-gray-300 ">
-            👋 Say Goodbye to Generic Strategies and <br /> Hello to Tailored
-            Solutions Built Just for You
+          <p className="paragraph">
+            ⚡️ Experience unparalleled web speed and scalability with expert
+            NextJS and Headless CMS web development
           </p>
-          <div className="mt-8 flex gap-x-4 ">
+          <div className="mt-8 flex flex-col lg:flex-row gap-3">
             <a
               href="#form"
-              className=" inline-block border-rose-600 px-4 py-1.5 text-base font-semibold leading-7 text-white shadow-sm ring-1 ring-rose-600 hover:bg-rose-700 hover:ring-rose-700 uppercase lg:text-xl"
+              className="text-center rounded-md transition-all inline-block bg-rose-500 p-2 text-lg font-semibold leading-7 text-white shadow-sm ring-1 ring-rose-500 hover:bg-rose-700 hover:ring-rose-700 lg:text-xl  lg:px-16 lg:py-3"
             >
-              Get started
-              <span className="ml-2 text-rose-200" aria-hidden="true">
-                &rarr;
-              </span>
+              Get in touch
+            </a>
+            <a className="text-center rounded-md transition-all inline-block bg-gray-50 p-2 text-lg font-semibold leading-7 text-black shadow-sm  hover:bg-gray-200 hover:ring-rose-700 lg:text-xl lg:px-16 lg:py-3">
+              Book a meeting
             </a>
           </div>
         </div>
@@ -50,6 +99,34 @@ export default function Hero() {
             </defs>
           </svg>
         </div>
+      </div>
+      <div id="marquee">
+        <Marquee className="max-w-6xl mx-auto" gradientColor={[17, 24, 39]}>
+          <div className="invert h-10 mx-5 lg:mx-10 ">
+            <Image className="h-full w-full" src={vercelLogo} />
+          </div>
+          <div className=" h-10 mx-5 lg:mx-10 ">
+            <Image height={40} src={sanityLogo} />
+          </div>
+          <div className="invert h-10 mx-5 lg:mx-10 ">
+            <Image className="h-full w-full" src={nextJSLogo} />
+          </div>
+          <div className=" h-10 mx-5 lg:mx-10 ">
+            <Image className="h-full w-full" src={jamstackLogo} />
+          </div>
+          <div className="invert h-10 mx-5 lg:mx-10 ">
+            <Image className="h-full w-full" src={vercelLogo} />
+          </div>
+          <div className=" h-10 mx-5 lg:mx-10 ">
+            <Image height={40} src={sanityLogo} />
+          </div>
+          <div className="invert h-10  mx-5 lg:mx-10 ">
+            <Image className="h-full w-full" src={nextJSLogo} />
+          </div>
+          <div className=" h-10 mx-5 lg:mx-10 ">
+            <Image className="h-full w-full" src={jamstackLogo} />
+          </div>
+        </Marquee>
       </div>
     </div>
   );
