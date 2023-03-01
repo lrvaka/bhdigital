@@ -141,6 +141,7 @@ const Features = () => {
                     </div>
                     <div className="glass-morph-1 relative rounded-md flex flex-col justify-center items-center gap-2 p-2 h-40">
                       <Image
+                        alt="safe"
                         src={safeImg}
                         fill
                         className="w-full h-full object-cover rounded-md"
