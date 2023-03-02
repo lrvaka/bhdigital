@@ -65,9 +65,9 @@ export default function Home({ firstLoad }: { firstLoad: boolean }) {
         <Works />
         <AboutUs />
         <Features />
-        <CTA />
+        {/* <CTA /> */}
         <Testimonial />
-        <ExtraFeatures />
+        {/* <ExtraFeatures /> */}
         <ContactSection />
         {/* <Form /> */}
       </Container>
