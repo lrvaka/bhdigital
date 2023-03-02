@@ -3,6 +3,7 @@ import vercelLogo from "../public/logos/vercel.svg";
 import nextJSLogo from "../public/logos/nextjs.svg";
 import sanityLogo from "../public/logos/sanity.png";
 import jamstackLogo from "../public/logos/jamstack.png";
+import tailwindLogo from "../public/logos/tailwind.png";
 import Marquee from "react-fast-marquee";
 import { useRef, useEffect, useLayoutEffect } from "react";
 import { gsap } from "../utils/gsap";
@@ -118,6 +119,13 @@ export default function Hero({ addAnimation }: { addAnimation: CallbackType }) {
               src={jamstackLogo}
             />
           </div>
+          <div className=" h-10 mx-5 lg:mx-10 ">
+            <Image
+              alt="tailwind"
+              className="h-full w-full"
+              src={tailwindLogo}
+            />
+          </div>
           <div className="invert h-10 mx-5 lg:mx-10 ">
             <Image alt="vercel" className="h-full w-full" src={vercelLogo} />
           </div>
@@ -132,6 +140,13 @@ export default function Hero({ addAnimation }: { addAnimation: CallbackType }) {
               alt="jamstack"
               className="h-full w-full"
               src={jamstackLogo}
+            />
+          </div>
+          <div className=" h-10 mx-5 lg:mx-10 ">
+            <Image
+              alt="tailwind"
+              className="h-full w-full"
+              src={tailwindLogo}
             />
           </div>
         </Marquee>
