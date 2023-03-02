@@ -76,7 +76,7 @@ const AboutUs = () => {
   return (
     <div
       ref={ref}
-      className="relative my-16 px-4 lg:px-8 lg:my-24 max-w-screen-xl mx-auto"
+      className="relative py-20 lg:py-40 px-4 lg:px-8 max-w-screen-xl mx-auto"
     >
       <div className="gap-20 flex flex-col lg:grid  lg:grid-cols-2">
         <div>

@@ -169,9 +169,6 @@ const Features = () => {
     },
 
     breakpoints: {
-      "(min-width: 400px)": {
-        slides: { perView: 2.25, spacing: 15 },
-      },
       "(min-width: 1000px)": {
         slides: { perView: 3.25, spacing: 20 },
       },
@@ -245,8 +242,8 @@ const Features = () => {
   }, []);
 
   return (
-    <div ref={ref} className="relative my-16 lg:my-24">
-      <div className="  px-4 lg:px-8 py-40  max-w-screen-xl mx-auto ">
+    <div ref={ref} className="relative py-20 lg:py-40">
+      <div className="  px-4 lg:px-8   max-w-screen-xl mx-auto ">
         <div
           ref={sliderRef}
           onMouseUp={(e) => {
@@ -273,11 +270,13 @@ const Features = () => {
           ))}
 
           <div className="keen-slider__slide glass-morph-1 glass-morph-1 rounded-md px-6 py-6 flex flex-col justify-between">
-            <Image
-              alt="wave emoji"
-              className=" w-32 h-48 self-center "
-              src={waveEmoji}
-            />
+            <div className="flex-1 self-center flex">
+              <Image
+                alt="wave emoji"
+                className="object-contain"
+                src={waveEmoji}
+              />
+            </div>
 
             <a
               href="#form"

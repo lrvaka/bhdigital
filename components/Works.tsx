@@ -169,7 +169,7 @@ const Works = () => {
   }, []);
 
   return (
-    <div className="my-16 lg:my-24">
+    <div className="py-20 lg:py-40 ">
       <h2 className="sr-only">Works - What we&apos;ve worked on</h2>
       <div
         ref={containerRef}
