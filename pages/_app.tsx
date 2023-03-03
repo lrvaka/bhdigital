@@ -9,10 +9,6 @@ import { useEffect, useState } from "react";
 import InitialLoadContext from "../store/initialLoad-context";
 import Navbar from "../components/ui/Navbar";
 
-if (typeof window !== "undefined") {
-  window.history.scrollRestoration = "manual";
-}
-
 function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter();
   const [firstLoad, setFirstLoad] = useState(false);
