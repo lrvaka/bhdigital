@@ -13,6 +13,8 @@
   ```
 */
 import { EnvelopeIcon, PhoneIcon } from "@heroicons/react/24/outline";
+import { gsap } from "../utils/gsap";
+import { useEffect, useRef } from "react";
 
 const navigation = [
   {
@@ -54,10 +56,34 @@ const navigation = [
 ];
 
 export default function Example() {
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    let context = gsap.context(() => {
+      gsap.set("#container > *", { opacity: 0, y: -10 });
+
+      gsap.to("#container > *", {
+        duration: 0.75,
+        y: 0,
+        opacity: 1,
+        ease: "back",
+        stagger: 0.25,
+        scrollTrigger: "#container",
+      });
+    }, ref);
+
+    return () => {
+      context.revert();
+    };
+  }, []);
+
   return (
-    <div className="relative py-40" id="form">
-      <div className="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
-        <h2 className="uppercase text-5xl font-bold tracking-tight text-rose-500 lg:text-9xl">
+    <div ref={ref} className="relative py-40" id="form">
+      <div
+        id="container"
+        className="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8"
+      >
+        <h2 className=" text-5xl font-bold tracking-tight text-rose-500 lg:text-9xl">
           Get in touch
         </h2>
         <p className="mt-3 text-xl lg:text-2xl 2xl:text-3xl leading-6 text-gray-100">

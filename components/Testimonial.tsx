@@ -1,10 +1,33 @@
 import Image from "next/image";
 import ewfLogo from "../public/ewf-logo.png";
 import ewfLogoNoText from "../public/ewf-logo-notext.png";
+import { gsap } from "../utils/gsap";
+import { useEffect, useRef } from "react";
 
 export default function Testimonial() {
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    let context = gsap.context(() => {
+      gsap.set("#container > *", { opacity: 0, y: -10 });
+
+      gsap.to("#container > *", {
+        duration: 0.75,
+        y: 0,
+        opacity: 1,
+        ease: "back",
+        stagger: 0.25,
+        scrollTrigger: "#container",
+      });
+    }, ref);
+
+    return () => {
+      context.revert();
+    };
+  }, []);
+
   return (
-    <section className="py-12 md:py-20 lg:py-24 relative">
+    <section ref={ref} className="py-12 md:py-20 lg:py-24 relative">
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="absolute  inset-x-0 top-0 z-10 transform-gpu overflow-hidden blur-3xl sm:top-0">
           <svg
@@ -33,7 +56,7 @@ export default function Testimonial() {
             </defs>
           </svg>
         </div>
-        <div className="relative">
+        <div id="container" className="relative">
           <div className="mx-auto w-32 h-32 invert">
             <Image src={ewfLogo} alt="exquisite wood floors" />
           </div>
@@ -58,7 +81,7 @@ export default function Testimonial() {
                   </div>
                 </div>
                 <div className="mt-3 text-center md:mt-0 md:ml-4 md:flex md:items-center">
-                  <div className="uppercase text-base font-medium text-gray-100">
+                  <div className=" text-base font-medium text-gray-100">
                     Brian Fingleton
                   </div>
 
@@ -70,7 +93,7 @@ export default function Testimonial() {
                     <path d="M11 0h3L9 20H6l5-20z" />
                   </svg>
 
-                  <div className="uppercase text-base font-medium text-gray-300">
+                  <div className=" text-base font-medium text-gray-300">
                     Founder, Exquisite Wood Floors
                   </div>
                 </div>

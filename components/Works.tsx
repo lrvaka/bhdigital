@@ -64,15 +64,14 @@ const Works = () => {
   useEffect(() => {
     let ctx = gsap.context(() => {
       worksList.forEach((e, i) => {
-        gsap.to("#screenshot" + i, {
-          yPercent: 50,
-          ease: "none",
-          scrollTrigger: {
-            trigger: "#item" + i,
-            start: "top bottom", // the default values
-            end: "bottom top",
-            scrub: true,
-          },
+        gsap.set("#info > *", {
+          y: -10,
+          opacity: 0,
+        });
+
+        gsap.set("#item" + i, {
+          y: -10,
+          opacity: 0,
         });
 
         gsap.to("#logo" + i, {
@@ -86,32 +85,18 @@ const Works = () => {
           },
         });
 
-        gsap.to("#cube" + i, {
-          opacity: 0,
-          ease: "none",
+        gsap.to("#item" + i, {
+          duration: 0.75,
+          y: 0,
+          opacity: 1,
+          ease: "back",
           scrollTrigger: {
+            start: "top bottom", // the default values
+            end: "bottom top",
+
             trigger: "#item" + i,
-            start: "top center", // the default values
-            end: "center center",
-            scrub: true,
           },
         });
-
-        // clip-path: polygon(0 0, 200% 0, 0 200%),
-
-        gsap.fromTo(
-          "#image-cover" + i,
-          {
-            clipPath: "polygon(0 0, 200% 0, 0 200%)",
-            ease: "power4.easeInOut",
-            scrollTrigger: {
-              trigger: "#item" + i,
-            },
-          },
-          {
-            clipPath: "polygon(0 0, 0% 0, 0 0%)",
-          }
-        );
       });
     }, containerRef);
 
@@ -194,11 +179,6 @@ const Works = () => {
                     " border border-gray-700 h-full rounded-lg overflow-hidden relative"
                   }
                 >
-                  <div
-                    id={"image-cover" + i}
-                    className="h-full w-full bg-gray-800 relative z-10"
-                  ></div>
-
                   <Image
                     id={"logo" + i}
                     src={e.logo}
@@ -207,7 +187,10 @@ const Works = () => {
                   />
                 </div>
               </div>
-              <div className="w-full px-2 lg:px-10 flex flex-col lg:h-full">
+              <div
+                id={"info" + i}
+                className="w-full px-2 lg:px-10 flex flex-col lg:h-full"
+              >
                 <ul className="flex gap-2 mb-8 lg:mb-16 flex-wrap">
                   {e.tags.tech.map((e, i) => (
                     <li
@@ -227,7 +210,7 @@ const Works = () => {
                   ))}
                 </ul>
                 <div className=" lg:flex-grow mb-10">
-                  <h3 className="text-3xl lg:text-6xl font-bold mb-7 after:block after:w-full after:border-b after:h-5 after:border-b-rose-900 uppercase">
+                  <h3 className="text-3xl lg:text-6xl font-bold mb-7 after:block after:w-full after:border-b after:h-5 after:border-b-rose-900">
                     {e.name}
                   </h3>
                   <p className="paragraph">{e.desc}</p>

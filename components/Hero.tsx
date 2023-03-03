@@ -68,8 +68,45 @@ export default function Hero({ addAnimation }: { addAnimation: CallbackType }) {
             >
               Get in touch
             </a>
-            <a className="text-center rounded-md transition-all inline-block bg-gray-50 p-2 text-lg font-semibold leading-7 text-black shadow-sm  hover:bg-gray-200 hover:ring-rose-700 lg:text-xl lg:px-16 lg:py-3">
-              Book a meeting
+            <a
+              href="https://calendly.com/luke-blockhead/general-meeting"
+              className="  rounded-md transition-all inline-block bg-gray-50 p-2 text-lg font-semibold leading-7 text-black shadow-sm  hover:bg-gray-200 hover:ring-rose-700 lg:text-xl lg:px-16 lg:py-3"
+            >
+              <div className="flex gap-2 justify-center">
+                <svg
+                  className="w-5 h-5 text-black self-center justify-self-center"
+                  width="800px"
+                  height="800px"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M3 10.312C3 5.93757 3.93757 5 8.312 5H15.688C20.0624 5 21 5.93757 21 10.312V15.688C21 20.0624 20.0624 21 15.688 21H8.312C3.93757 21 3 20.0624 3 15.688V10.312Z"
+                    stroke="#323232"
+                    stroke-width="2"
+                  />
+                  <path
+                    d="M6 5L6 3"
+                    stroke="#323232"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                  />
+                  <path
+                    d="M18 5L18 3"
+                    stroke="#323232"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                  />
+                  <path
+                    d="M3.5 9H20.5"
+                    stroke="#323232"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                  />
+                </svg>
+                <span>Book a meeting</span>
+              </div>
             </a>
           </div>
         </div>

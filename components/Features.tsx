@@ -177,63 +177,16 @@ const Features = () => {
 
   useEffect(() => {
     let context = gsap.context(() => {
-      gsap.set("#item-container", { y: -20, opacity: 0 });
-      gsap.set("#item-header", { y: -20, opacity: 0 });
+      gsap.set("#feature-container > *", { opacity: 0 });
 
-      gsap.to("#sparkle-paths > *", {
-        scale: 0.85,
-        y: 20,
-        ease: "power4.easeInOut",
-        stagger: 0.1,
-        repeat: Infinity,
-        yoyo: true,
+      gsap.to("#feature-container > *", {
+        duration: 2,
+
+        opacity: 1,
+        ease: "back",
+        stagger: 0.25,
+        scrollTrigger: "#feature-container",
       });
-
-      gsap.fromTo(
-        "#item-container",
-        { y: -20, opacity: 0 },
-        {
-          y: 0,
-          opacity: 1,
-          stagger: 0.5,
-          duration: 0.5,
-          scrollTrigger: "#item-container",
-        }
-      );
-
-      gsap.fromTo(
-        "#item-header",
-        { y: -20, opacity: 0 },
-        {
-          y: 0,
-          delay: 0.25,
-          opacity: 1,
-          stagger: 0.5,
-          duration: 0.5,
-          scrollTrigger: "#item-container",
-        }
-      );
-
-      gsap.fromTo(
-        "#circle",
-        { drawSVG: "0% 0%" },
-        {
-          drawSVG: "0% 100%",
-          duration: 4,
-          ease: "power4.in",
-          stagger: 0.5,
-          scrollTrigger: "#item-container",
-        }
-      );
-
-      gsap.fromTo(
-        "#rocket",
-        { y: 50 },
-        {
-          y: -50,
-          scrollTrigger: { trigger: "#item-container", scrub: 1 },
-        }
-      );
     }, ref);
 
     return () => {
@@ -242,9 +195,10 @@ const Features = () => {
   }, []);
 
   return (
-    <div ref={ref} className="relative py-20 lg:py-40">
+    <div ref={ref} className="relative py-20 lg:py-32">
       <div className="  px-4 lg:px-8   max-w-screen-xl mx-auto ">
         <div
+          id="feature-container"
           ref={sliderRef}
           onMouseUp={(e) => {
             const target = e.target as Element;
@@ -258,6 +212,7 @@ const Features = () => {
         >
           {featureList.map((e, i) => (
             <div
+              id="feature-item"
               key={e.title}
               className="keen-slider__slide glass-morph-1 rounded-md px-6 py-6 flex flex-col"
             >

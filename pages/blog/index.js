@@ -21,7 +21,7 @@ export default function Blog({ posts }) {
               All Posts
             </h1>
             <p className="text-xl lg:text-2xl">
-              Check out what&apos;s on our mind!
+              Check out what&apos;s in Blockhead Digital&apos;s zeitgeist
             </p>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">

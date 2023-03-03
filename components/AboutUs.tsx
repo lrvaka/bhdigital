@@ -3,6 +3,7 @@ import { gsap } from "../utils/gsap";
 import Image from "next/image";
 import safeImg from "../public/safe.png";
 import rocketImg from "../public/rocket.png";
+import Link from "next/link";
 
 const AboutUs = () => {
   const ref = useRef<HTMLDivElement>(null);
@@ -11,6 +12,10 @@ const AboutUs = () => {
     let context = gsap.context(() => {
       gsap.set("#item-container", { y: -20, opacity: 0 });
       gsap.set("#item-header", { y: -20, opacity: 0 });
+      gsap.set("#info > *", {
+        y: -10,
+        opacity: 0,
+      });
 
       gsap.to("#sparkle-paths > *", {
         scale: 0.85,
@@ -66,6 +71,15 @@ const AboutUs = () => {
           scrollTrigger: { trigger: "#item-container", scrub: 1 },
         }
       );
+
+      gsap.to("#info > *", {
+        duration: 0.75,
+        y: 0,
+        opacity: 1,
+        ease: "back",
+        stagger: 0.25,
+        scrollTrigger: "#info",
+      });
     }, ref);
 
     return () => {
@@ -78,7 +92,7 @@ const AboutUs = () => {
       ref={ref}
       className="relative py-20 lg:py-40 px-4 lg:px-8 max-w-screen-xl mx-auto"
     >
-      <div className="absolute  inset-x-0 top-0 z-10 transform-gpu overflow-hidden blur-3xl sm:top-[calc(100%-50rem)]">
+      <div className="absolute  inset-x-0 top-0 transform-gpu overflow-hidden blur-3xl sm:top-[calc(100%-50rem)]">
         <svg
           className="relative left-[calc(20%+3rem)] h-[21.1875rem] max-w-none -translate-x-1/2 sm:left-[calc(10%+36rem)] sm:h-[42.375rem]"
           viewBox="0 0 1155 678"
@@ -106,7 +120,7 @@ const AboutUs = () => {
         </svg>
       </div>
       <div className="gap-20 flex flex-col lg:grid  lg:grid-cols-2 relative">
-        <div>
+        <div id="info">
           <h2 className="text-5xl font-bold">
             Our Next-Gen Technologies & Expertise
           </h2>
@@ -119,12 +133,16 @@ const AboutUs = () => {
             Our approach to web design and development is grounded in our
             expertise in these technologies, allowing us to create ultra-fast
             and scalable website solutions that are tailored to your business
-            needs. We pride ourselves on creating websites that are built to
-            last and stay up to date with the latest industry standards. With
-            our expertise, you can take your digital presence to the next level,
+            needs — you can take your digital presence to the next level,
             achieve your business goals with confidence and out-compete your
             competition.
           </p>
+          <Link
+            href="/blog/what-is-a-headless-cms-and-why-you-should-consider-it"
+            className=" mt-8 text-center rounded-md transition-all inline-block bg-rose-500 p-2 text-lg font-semibold leading-7 text-white shadow-sm ring-1 ring-rose-500 hover:bg-rose-700 hover:ring-rose-700 lg:text-xl  lg:px-16 lg:py-3"
+          >
+            What is a Headless CMS?
+          </Link>
         </div>
         <div>
           <svg
