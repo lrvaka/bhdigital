@@ -15,19 +15,26 @@ export default function Blog({ posts }) {
     <>
       <Navbar />
       <Container customMeta={meta}>
-        <div className="py-32 lg:py-40 max-w-lg mx-auto px-4 lg-px-4">
-          <h1 className="mb-2 font-bold text-5xl uppercase text-rose-600">
-            All Posts
-          </h1>
-
-          {posts.map((post) => (
-            <PostCard
-              key={post.slug.current}
-              title={post.title}
-              date={format(parseISO(post.publishedAt), "MMMM dd, yyyy")}
-              slug={post.slug.current}
-            />
-          ))}
+        <div className="py-32 lg:py-40 max-w-screen-lg mx-auto px-4 lg-px-4">
+          <div className="mb-5 lg:mb-10">
+            <h1 className="font-bold text-6xl lg:text-8xl uppercase text-rose-500">
+              All Posts
+            </h1>
+            <p className="text-xl lg:text-2xl">
+              Check out what&apos;s on our mind!
+            </p>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            {posts.map((post) => (
+              <PostCard
+                key={post.slug.current}
+                title={post.title}
+                date={format(parseISO(post.publishedAt), "MMMM dd, yyyy")}
+                slug={post.slug.current}
+                image={post.mainImage}
+              />
+            ))}
+          </div>
         </div>
       </Container>
     </>
