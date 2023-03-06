@@ -1,12 +1,20 @@
 import Image from "next/image";
-import vercelLogo from "../public/logos/vercel.svg";
-import nextJSLogo from "../public/logos/nextjs.svg";
+import vercelLogo from "../public/logos/vercel.png";
+import nextJSLogo from "../public/logos/nextjs.png";
 import sanityLogo from "../public/logos/sanity.png";
 import jamstackLogo from "../public/logos/jamstack.png";
 import tailwindLogo from "../public/logos/tailwind.png";
 import Marquee from "react-fast-marquee";
 import { useRef, useEffect, useLayoutEffect } from "react";
 import { gsap } from "../utils/gsap";
+
+const logos = [
+  { logo: vercelLogo, alt: "vercel" },
+  { logo: nextJSLogo, alt: "nextJS" },
+  { logo: sanityLogo, alt: "sanity" },
+  { logo: jamstackLogo, alt: "jamstack" },
+  { logo: tailwindLogo, alt: "tailwind" },
+];
 
 type CallbackType = (animation: GSAPTimeline, index: number | string) => void;
 
@@ -138,54 +146,16 @@ export default function Hero({ addAnimation }: { addAnimation: CallbackType }) {
           </svg>
         </div>
       </div>
-      <div id="marquee">
-        <Marquee className="max-w-6xl mx-auto" gradientColor={[17, 24, 39]}>
-          <div className="invert h-10 mx-5 lg:mx-10 ">
-            <Image alt="vercel" className="h-full w-full" src={vercelLogo} />
-          </div>
-          <div className=" h-10 mx-5 lg:mx-10 ">
-            <Image alt="sanity" height={40} src={sanityLogo} />
-          </div>
-          <div className="invert h-10 mx-5 lg:mx-10 ">
-            <Image alt="nextJS" className="h-full w-full" src={nextJSLogo} />
-          </div>
-          <div className=" h-10 mx-5 lg:mx-10 ">
+      <div className="max-w-6xl mx-auto " id="marquee">
+        <Marquee gradientColor={[17, 24, 39]}>
+          {logos.map((e) => (
             <Image
-              alt="jamstack"
-              className="h-full w-full"
-              src={jamstackLogo}
+              key={e.alt}
+              src={e.logo}
+              alt={e.alt}
+              className="h-10 object-contain w-auto mx-10 lg:mx-16"
             />
-          </div>
-          <div className=" h-10 mx-5 lg:mx-10 ">
-            <Image
-              alt="tailwind"
-              className="h-full w-full"
-              src={tailwindLogo}
-            />
-          </div>
-          <div className="invert h-10 mx-5 lg:mx-10 ">
-            <Image alt="vercel" className="h-full w-full" src={vercelLogo} />
-          </div>
-          <div className=" h-10 mx-5 lg:mx-10 ">
-            <Image alt="sanity" height={40} src={sanityLogo} />
-          </div>
-          <div className="invert h-10 mx-5 lg:mx-10 ">
-            <Image alt="nextJS" className="h-full w-full" src={nextJSLogo} />
-          </div>
-          <div className=" h-10 mx-5 lg:mx-10 ">
-            <Image
-              alt="jamstack"
-              className="h-full w-full"
-              src={jamstackLogo}
-            />
-          </div>
-          <div className=" h-10 mx-5 lg:mx-10 ">
-            <Image
-              alt="tailwind"
-              className="h-full w-full"
-              src={tailwindLogo}
-            />
-          </div>
+          ))}
         </Marquee>
       </div>
     </div>

@@ -17,9 +17,7 @@ export default function Blog({ posts }) {
       <Container customMeta={meta}>
         <div className="py-32 lg:py-40 max-w-screen-lg mx-auto px-4 lg-px-4">
           <div className="mb-5 lg:mb-10">
-            <h1 className="font-bold text-6xl lg:text-8xl ">
-              Blog
-            </h1>
+            <h1 className="font-bold text-6xl lg:text-8xl ">Blog</h1>
             <p className="text-xl lg:text-2xl text-gray-300">
               Check out what&apos;s on Blockhead&apos;s mind 👁️
             </p>

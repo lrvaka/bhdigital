@@ -178,14 +178,20 @@ const Features = () => {
   useEffect(() => {
     let context = gsap.context(() => {
       gsap.set("#feature-container > *", { opacity: 0 });
+      gsap.set("#wave-emoji", { x: -10 });
 
       gsap.to("#feature-container > *", {
         duration: 2,
-
         opacity: 1,
         ease: "back",
         stagger: 0.25,
         scrollTrigger: "#feature-container",
+      });
+
+      gsap.to("#wave-emoji", {
+        rotate: "-5deg",
+        yoyo: true,
+        repeat: Infinity,
       });
     }, ref);
 
@@ -225,11 +231,12 @@ const Features = () => {
           ))}
 
           <div className="keen-slider__slide glass-morph-1 glass-morph-1 rounded-md px-6 py-6 flex flex-col justify-between">
-            <div className="flex-1 self-center flex">
+            <div className="flex-1 self-center  flex">
               <Image
+                id="wave-emoji"
                 alt="wave emoji"
-                className="object-contain"
                 src={waveEmoji}
+                className=" object-contain self-center "
               />
             </div>
 

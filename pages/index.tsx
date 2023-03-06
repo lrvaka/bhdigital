@@ -33,7 +33,6 @@ export default function Home({ firstLoad }: { firstLoad: boolean }) {
   const addAnimation = useCallback<CallbackType>(
     (animation: GSAPTimeline, index: number | string) => {
       tl && tl.add(animation, index);
-      console.log(tl);
     },
     [tl]
   );
