@@ -10,10 +10,8 @@ import Navbar from "../../components/ui/Navbar";
 
 const builder = imageUrlBuilder(client);
 
-const ImageComponent = ({ value, isInline }) => {
+const ImageComponent = ({ value }) => {
   const imageProps = useNextSanityImage(client, value);
-  console.log(imageProps);
-  console.log({ value });
 
   return (
     <Image
@@ -21,7 +19,6 @@ const ImageComponent = ({ value, isInline }) => {
       alt={value.alt}
       style={{ width: "100%", height: "auto", borderRadius: "5px" }} // layout="responsive" prior to Next 13.0.0
       sizes="(max-width: 800px) 100vw, 800px"
-      loader={imageProps.loader}
     />
   );
 };
