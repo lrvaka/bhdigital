@@ -12,12 +12,16 @@ const builder = imageUrlBuilder(client);
 
 const ImageComponent = ({ value, isInline }) => {
   const imageProps = useNextSanityImage(client, value);
+  console.log(imageProps);
+  console.log({ value });
 
   return (
     <Image
       {...imageProps}
+      alt={value.alt}
       style={{ width: "100%", height: "auto", borderRadius: "5px" }} // layout="responsive" prior to Next 13.0.0
       sizes="(max-width: 800px) 100vw, 800px"
+      loader={imageProps.loader}
     />
   );
 };

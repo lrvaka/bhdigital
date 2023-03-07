@@ -154,6 +154,7 @@ export default function Hero({ addAnimation }: { addAnimation: CallbackType }) {
               src={e.logo}
               alt={e.alt}
               className="h-10 object-contain w-auto mx-10 lg:mx-16"
+              placeholder="blur"
             />
           ))}
         </Marquee>
