@@ -15,8 +15,9 @@
 
 @layer components {
   .paragraph {
-    @apply text-lg mt-4 text-gray-300 lg:text-xl;
+    @apply text-xl mt-4 text-gray-300 lg:text-2xl;
   }
+  
 }
 
 html,

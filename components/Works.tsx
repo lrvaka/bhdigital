@@ -1,13 +1,14 @@
 import WorksCube from "./WorksCube";
-import ewfScreenshot from "../public/works/ewf-screenshot.png";
-import fiScreenshot from "../public/works/fi-screenshot.png";
-import catScreenshot from "../public/works/cat-screenshot.png";
 import ewfLogo from "../public/logos/ewfLogo.png";
 import fiLogo from "../public/logos/fiLogo.png";
 import catLogo from "../public/logos/catLogo.svg";
 import Image from "next/image";
 import { useEffect, useLayoutEffect, useRef } from "react";
 import { gsap, ScrollTrigger } from "../utils/gsap";
+import ewfScreenshot from "../public/screenshots/EWF.png";
+import fiScreenshot from "../public/screenshots/Finnish Interiors.png";
+import catScreenshot from "../public/screenshots/catmob.png";
+import dougScreenshot from "../public/screenshots/doug.png";
 
 const worksList = [
   {
@@ -16,14 +17,13 @@ const worksList = [
       tech: ["NextJS", "Vercel", "Design"],
       marketing: ["Paid Ads", "Social Media Management", "Branding"],
     },
+    alt: "ewf screenshot",
     desc: "We gave the wood flooring company a polished and professional digital makeover, nailing the perfect balance of style and functionality in the website, crafting engaging social media content and using targeted paid ads to reach the right audience.",
     matCap: "./matcaps/ewfMat.png",
     decal: "./logos/ewfLogo.png",
-    screenshot: ewfScreenshot,
     url: "https://www.exquisitewoodfloors.com/",
     logo: ewfLogo,
-    bgColor:
-      "bg-[conic-gradient(at_bottom_right,_var(--tw-gradient-stops))] from-teal-800 via-amber-200 to-green-900",
+    screenshot: ewfScreenshot,
   },
   {
     name: "Finnish Interiors",
@@ -31,15 +31,14 @@ const worksList = [
       tech: ["NextJS", "Vercel", "Design"],
       marketing: ["Social Media Management", "Branding"],
     },
+    alt: "fi screenshot",
     desc: "With a beautifully crafted website, expertly managed social media channels and a fresh new brand, Blockhead Digital helped this interior contracting company soar to new heights, leaving a lasting impression on their clients and competitors alike.",
     matCap: "./matcaps/fiMat.png",
     decal: "./logos/fiLogo.png",
-    screenshot: fiScreenshot,
     url: "https://finnish-interiors.vercel.app/",
     comingSoon: true,
     logo: fiLogo,
-    bgColor:
-      "bg-[conic-gradient(at_bottom_right,_var(--tw-gradient-stops))] from-white via-yellow-400 to-yellow-200",
+    screenshot: fiScreenshot,
   },
   {
     name: "CatMobStaz",
@@ -53,8 +52,19 @@ const worksList = [
     screenshot: catScreenshot,
     url: "https://www.catmobstaz.com/",
     logo: catLogo,
-    bgColor:
-      "bg-[conic-gradient(at_bottom_right,_var(--tw-gradient-stops))] from-rose-800 via-pink-300 to-rose-800",
+  },
+  {
+    name: "Doug'll Do It",
+    tags: {
+      tech: ["NextJS", "Vercel", "Design"],
+      marketing: ["Social Media Management", "Branding"],
+    },
+    desc: "Our team successfully enhanced CatMobStaz's digital presence through web design/development, social media management, and branding, resulting in a sleek website and strong social media presence that showcases their purrfect NFTs.",
+    matCap: "./matcaps/mobMat.png",
+    decal: "./logos/catLogo.svg",
+    screenshot: dougScreenshot,
+    url: "https://www.douglldoit.com/",
+    logo: catLogo,
   },
 ];
 
@@ -75,7 +85,7 @@ const Works = () => {
         });
 
         gsap.to("#logo" + i, {
-          scale: 2,
+          scale: 1.5,
           ease: "none",
           scrollTrigger: {
             trigger: "#item" + i,
@@ -174,16 +184,13 @@ const Works = () => {
               <div id="works-img" className="h-[400px] lg:h-full lg:w-2/3 mb-5">
                 <div
                   id={"img-container" + i}
-                  className={
-                    e.bgColor +
-                    " border border-gray-700 h-full rounded-lg overflow-hidden relative"
-                  }
+                  className=" border border-gray-700 h-full rounded-lg overflow-hidden relative"
                 >
                   <Image
                     id={"logo" + i}
-                    src={e.logo}
-                    alt={e.logo + i}
-                    className="absolute w-44 -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 opacity-100"
+                    src={e.screenshot}
+                    alt={e.alt}
+                    className="w-full h-full opacity-100 object-cover"
                   />
                 </div>
               </div>
@@ -217,7 +224,7 @@ const Works = () => {
                 </div>
 
                 <a
-                  className="text-center rounded-md transition-all inline-block bg-rose-500 p-2 text-lg font-semibold leading-7 text-white shadow-sm ring-1 ring-rose-500 hover:bg-rose-700 hover:ring-rose-700 lg:text-xl"
+                  className="hover:-translate-y-1 text-center rounded-md transition-all inline-block bg-rose-500 p-2 text-lg font-semibold leading-7 text-white shadow-sm ring-1 ring-rose-500 hover:bg-rose-700 hover:ring-rose-700 lg:text-xl"
                   target="_blank"
                   rel="noreferrer"
                   href={e.url}

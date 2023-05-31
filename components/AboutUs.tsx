@@ -138,10 +138,10 @@ const AboutUs = () => {
             competition.
           </p>
           <Link
-            href="/blog/what-is-a-headless-cms-and-why-you-should-consider-it"
+            href="/blog/why-choose-hand-coded-websites-for-your-business"
             className=" mt-8 text-center rounded-md transition-all inline-block bg-rose-500 p-2 text-lg font-semibold leading-7 text-white shadow-sm ring-1 ring-rose-500 hover:bg-rose-700 hover:ring-rose-700 lg:text-xl  lg:px-16 lg:py-3"
           >
-            What is a Headless CMS?
+            Why Hand-Coded Websites?
           </Link>
         </div>
         <div>

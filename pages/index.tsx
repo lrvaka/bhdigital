@@ -4,7 +4,7 @@ import HeroBackground from "../components/HeroBackground";
 import useIsomorphicLayoutEffect from "../hooks/useIsomorphicLayoutEffect";
 import { useState, useCallback } from "react";
 import gsap from "gsap";
-
+import MainFeatures from "../components/MainFeatures";
 import Hero from "../components/Hero";
 import Footer from "../components/Footer";
 import CTA from "../components/CTA";
@@ -15,6 +15,7 @@ import ExtraFeatures from "../components/ExtraFeatures";
 import Testimonial from "../components/Testimonial";
 import Container from "../components/ui/Container";
 import Navbar from "../components/ui/Navbar";
+import WhatsIncluded from "../components/WhatsIncluded";
 
 import NewsletterModal from "../components/NewsletterModal";
 import Loading from "../components/Loading";
@@ -61,9 +62,12 @@ export default function Home({ firstLoad }: { firstLoad: boolean }) {
 
           <Hero addAnimation={addAnimation} />
         </div>
+        <MainFeatures />
+
         <Works />
-        <AboutUs />
-        <Features />
+        <WhatsIncluded />
+        {/* <AboutUs />
+        <Features /> */}
         {/* <CTA /> */}
         <Testimonial />
         {/* <ExtraFeatures /> */}
