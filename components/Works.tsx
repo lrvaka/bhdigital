@@ -4,7 +4,9 @@ import fiLogo from "../public/logos/fiLogo.png";
 import catLogo from "../public/logos/catLogo.svg";
 import Image from "next/image";
 import { useEffect, useLayoutEffect, useRef } from "react";
-import { gsap, ScrollTrigger } from "../utils/gsap";
+
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import ewfScreenshot from "../public/screenshots/EWF.png";
 import fiScreenshot from "../public/screenshots/Finnish Interiors.png";
 import catScreenshot from "../public/screenshots/catmob.png";
@@ -71,7 +73,7 @@ const worksList = [
 const Works = () => {
   const containerRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     let ctx = gsap.context(() => {
       worksList.forEach((e, i) => {
         gsap.set("#info > *", {
@@ -115,7 +117,9 @@ const Works = () => {
     };
   }, []);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
+    gsap.registerEffect(ScrollTrigger);
+
     let mm = gsap.matchMedia(containerRef);
 
     mm.add("(min-width: 1024px)", (context) => {
