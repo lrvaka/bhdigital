@@ -7,7 +7,7 @@ const Loading = ({ ...props }) => {
   const container = useRef<HTMLDivElement | null>(null);
   const tl = useRef<GSAPTimeline>();
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     // Note that ref.current may be null. This is expected, because you may
     // conditionally render the ref-ed element, or you may forgot to assign it
 
@@ -79,7 +79,7 @@ const Loading = ({ ...props }) => {
             id="logo"
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 524.99 571.61"
-            className="max-w-[100px] md:max-w-[125px] h-full w-full"
+            className="max-w-[100px] md:max-w-[125px] h-full w-full "
             {...props}
           >
             <defs>
