@@ -3,47 +3,9 @@ import client from "../../helpers/sanity";
 import { parseISO, format } from "date-fns";
 import Container from "../../components/ui/Container";
 import Navbar from "../../components/ui/Navbar";
-import { Slug } from "@sanity/types";
 
-interface ImageMeta {
-  blurhash?: string;
-  lqip?: string;
-  palette?: any; // Replace with the proper type
-  exif?: any; // Replace with the proper type
-  location?: any; // Replace with the proper type
-}
 
-interface Image {
-  asset: {
-    _ref: string;
-  };
-  alt?: string;
-  metadata?: ImageMeta;
-}
-
-interface Block {
-  _type: "block";
-  children: { _key: string; _type: "span"; marks: string[]; text: string }[];
-  markDefs: any[]; // Replace with the proper type if you have a specific type for markDefs
-  style: string;
-}
-
-interface BlogPost {
-  _id: string;
-  _type: "blogPost";
-  title: string;
-  slug: Slug;
-  publishedAt: string;
-  mainImage: Image;
-  excerpt?: string;
-  body: Array<Block | Image>;
-  author: string; // Replace with an Author type if you have an author schema.
-  views?: number;
-  likes?: number;
-  categories?: string[];
-}
-
-export default function Blog({ posts }: { posts: BlogPost[] }) {
+export default function Blog({ posts }: any) {
   const meta = {
     title: "Blog - Blockhead Digital",
     description: "Learn about everything Blockhead Digital and technology",
@@ -61,7 +23,7 @@ export default function Blog({ posts }: { posts: BlogPost[] }) {
             </p>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            {posts.map((post) => (
+            {posts.map((post: any) => (
               <PostCard
                 key={post.slug.current}
                 title={post.title}

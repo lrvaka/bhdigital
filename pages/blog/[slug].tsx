@@ -1,59 +1,13 @@
 import client from "../../helpers/sanity";
 import { PortableText } from "@portabletext/react";
 import { parseISO, format } from "date-fns";
-import { useNextSanityImage, UseNextSanityImageProps } from "next-sanity-image";
+import { useNextSanityImage } from "next-sanity-image";
 import imageUrlBuilder from "@sanity/image-url";
 import Image from "next/image";
 import Container from "../../components/ui/Container";
 import Navbar from "../../components/ui/Navbar";
-import { useEffect } from "react";
-import { Slug } from "@sanity/types";
 
 const builder = imageUrlBuilder(client);
-
-interface Params {
-  slug: {
-    current: string;
-  };
-}
-
-interface ImageMeta {
-  blurhash?: string;
-  lqip?: string;
-  palette?: any; // Replace with the proper type
-  exif?: any; // Replace with the proper type
-  location?: any; // Replace with the proper type
-}
-
-interface Image {
-  asset: {
-    _ref: string;
-  };
-  alt?: string;
-  metadata?: ImageMeta;
-}
-
-interface Block {
-  _type: "block";
-  children: { _key: string; _type: "span"; marks: string[]; text: string }[];
-  markDefs: any[]; // Replace with the proper type if you have a specific type for markDefs
-  style: string;
-}
-
-interface BlogPost {
-  _id: string;
-  _type: "blogPost";
-  title: string;
-  slug: Slug;
-  publishedAt: string;
-  mainImage: Image;
-  excerpt?: string;
-  body: Array<Block | Image>;
-  author: string; // Replace with an Author type if you have an author schema.
-  views?: number;
-  likes?: number;
-  categories?: string[];
-}
 
 const ImageComponent = ({ value }: any) => {
   const imageProps: any = useNextSanityImage(client, value);
@@ -74,7 +28,7 @@ const components = {
   },
 };
 
-export default function Post({ post }: { post: any }) {
+export default function Post({ post }: any) {
   const mainImageProps: any = useNextSanityImage(client, post.mainImage);
 
   const meta = {
@@ -134,7 +88,7 @@ export const getStaticPaths = async () => {
   };
 };
 
-export const getStaticProps = async (params: any) => {
+export const getStaticProps = async ({ params }: any) => {
   const post = await client.fetch(
     `
   *[_type == "blogPost" && slug.current == $slug][0]
