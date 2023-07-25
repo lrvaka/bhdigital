@@ -316,7 +316,7 @@ const MainFeatures = () => {
   }, []);
 
   return (
-    <div ref={ref} className="px-2 lg:px-0">
+    <div ref={ref} className="px-4 lg:px-0">
       <div className="mb-16 lg:mb-20 text-center flex flex-col justify-center items-center max-w-lg mx-auto">
         <h2 className="text-4xl sm:text-5xl lg:text-6xl  font-bold tracking-tight  max-w-2xl">
           Simpler is better, especially in Digital Growth

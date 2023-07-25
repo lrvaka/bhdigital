@@ -117,15 +117,14 @@ export default function Hero({ addAnimation }: { addAnimation: CallbackType }) {
               Better Approach to Digital Growth
             </h1>
             <p className="paragraph">
-              ⚡️ Subscription-based Partnership to Elevate Your Brand&apos;s
-              Online Visibility and Drive Results
+              ⚡️ Elevate Your Brand&apos;s Online Visibility and Drive Results with Tailored Solutions
             </p>
             <div className="mt-8 flex flex-col lg:flex-row gap-3 justify-center">
               <a
                 href="#form"
                 className=" hover:-translate-y-1 text-center rounded-md transition-all inline-block bg-rose-500 p-2 text-lg font-semibold leading-7 text-white shadow-sm ring-1 ring-rose-500 hover:bg-rose-700 hover:ring-rose-700 lg:text-xl  lg:px-16 lg:py-3"
               >
-               Contact
+                Contact
               </a>
               <a
                 href="https://calendly.com/luke-blockhead/general-meeting"

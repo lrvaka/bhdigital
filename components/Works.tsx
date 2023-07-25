@@ -15,10 +15,7 @@ import dougScreenshot from "../public/screenshots/doug.png";
 const worksList = [
   {
     name: "Exquisite Wood Floors",
-    tags: {
-      tech: ["NextJS", "Vercel", "Design"],
-      marketing: ["Paid Ads", "Social Media Management", "Branding"],
-    },
+    tags: ["Web Design/Dev", "Social Media Management", "Paid Ads", "Branding"],
     alt: "ewf screenshot",
     desc: "We gave the wood flooring company a polished and professional digital makeover, nailing the perfect balance of style and functionality in the website, crafting engaging social media content and using targeted paid ads to reach the right audience.",
     matCap: "./matcaps/ewfMat.png",
@@ -29,10 +26,7 @@ const worksList = [
   },
   {
     name: "Finnish Interiors",
-    tags: {
-      tech: ["NextJS", "Vercel", "Design"],
-      marketing: ["Social Media Management", "Branding"],
-    },
+    tags: ["Web Design/Dev", "Social Media Management", "Branding"],
     alt: "fi screenshot",
     desc: "With a beautifully crafted website, expertly managed social media channels and a fresh new brand, Blockhead Digital helped this interior contracting company soar to new heights, leaving a lasting impression on their clients and competitors alike.",
     matCap: "./matcaps/fiMat.png",
@@ -44,10 +38,8 @@ const worksList = [
   },
   {
     name: "CatMobStaz",
-    tags: {
-      tech: ["NextJS", "Vercel", "Design"],
-      marketing: ["Social Media Management", "Branding"],
-    },
+    tags: ["Web Design/Dev", "Social Media Management", "Branding"],
+    alt: "catmobstaz screenshot",
     desc: "Our team successfully enhanced CatMobStaz's digital presence through web design/development, social media management, and branding, resulting in a sleek website and strong social media presence that showcases their purrfect NFTs.",
     matCap: "./matcaps/mobMat.png",
     decal: "./logos/catLogo.svg",
@@ -57,10 +49,8 @@ const worksList = [
   },
   {
     name: "Doug'll Do It",
-    tags: {
-      tech: ["NextJS", "Vercel", "Design"],
-      marketing: ["Social Media Management", "Branding"],
-    },
+    tags: ["Web Design/Dev", "Social Media Management", "Branding"],
+    alt: "doug'll do it screenshot",
     desc: "Our team successfully enhanced CatMobStaz's digital presence through web design/development, social media management, and branding, resulting in a sleek website and strong social media presence that showcases their purrfect NFTs.",
     matCap: "./matcaps/mobMat.png",
     decal: "./logos/catLogo.svg",
@@ -203,15 +193,7 @@ const Works = () => {
                 className="w-full px-2 lg:px-10 flex flex-col lg:h-full"
               >
                 <ul className="flex gap-2 mb-8 lg:mb-16 flex-wrap">
-                  {e.tags.tech.map((e, i) => (
-                    <li
-                      key={e + i}
-                      className="text-gray-100 text-center rounded-sm bg-rose-600 px-3 max-w-max text-md font-bold"
-                    >
-                      {e}
-                    </li>
-                  ))}
-                  {e.tags.marketing.map((e, i) => (
+                  {e.tags.map((e, i) => (
                     <li
                       key={e + i}
                       className="text-gray-100 text-center rounded-sm border border-gray-700 px-3 max-w-max text-md font-bold"
