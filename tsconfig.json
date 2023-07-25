@@ -15,6 +15,6 @@
     "jsx": "preserve",
     "incremental": true
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "components/HeroBackground.js", "pages/sitemap.xml.js"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "components/HeroBackground.js", "pages/sitemap.xml.js", "lib/fpixel.js"],
   "exclude": ["node_modules"]
 }
