@@ -13,11 +13,18 @@
   }
 }
 
+@layer components {
+  .paragraph {
+    @apply text-xl mt-4 text-gray-300 lg:text-2xl;
+  }
+  
+}
+
 html,
 body {
   padding: 0;
   margin: 0;
-  background-color: #001a28;
+  background-color: #111827;
   color: white;
 }
 
@@ -94,4 +101,20 @@ a {
 .slide-exit-active {
   opacity: 0;
   transition: opacity 250ms ease-in-out;
+}
+
+.glass-morph {
+  /* From https://css.glass */
+  background: rgba(17, 24, 39, 0.5);
+
+  /* box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); */
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.glass-morph-1 {
+  /* From https://css.glass */
+  background: rgba(75, 85, 99, 0.15);
+
+  border: 1px solid rgba(75, 85, 99, 0.17);
 }

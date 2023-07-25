@@ -1,35 +1,170 @@
-export default function Hero() {
+import Image from "next/image";
+import vercelLogo from "../public/logos/vercel.png";
+import nextJSLogo from "../public/logos/nextjs.png";
+import sanityLogo from "../public/logos/sanity.png";
+import jamstackLogo from "../public/logos/jamstack.png";
+import tailwindLogo from "../public/logos/tailwind.png";
+import catMobstazLogo from "../public/logos/catmobstaz-logo.png";
+import ewfScreenshot from "../public/screenshots/EWF.png";
+import fiScreenshot from "../public/screenshots/Finnish Interiors.png";
+import catScreenshot from "../public/screenshots/catmob.png";
+import dougScreenshot from "../public/screenshots/doug.png";
+import Marquee from "react-fast-marquee";
+import { useRef, useEffect, useLayoutEffect } from "react";
+import { gsap } from "../utils/gsap";
+
+const screenshots = [
+  { screenshot: catScreenshot, alt: "catmobstaz" },
+  { screenshot: ewfScreenshot, alt: "ewf" },
+  { screenshot: fiScreenshot, alt: "finnish" },
+  { screenshot: dougScreenshot, alt: "doug" },
+  { screenshot: catScreenshot, alt: "catmobstaz" },
+  { screenshot: ewfScreenshot, alt: "ewf" },
+  { screenshot: fiScreenshot, alt: "finnish" },
+  { screenshot: dougScreenshot, alt: "doug" },
+];
+
+type CallbackType = (animation: GSAPTimeline, index: number | string) => void;
+
+export default function Hero({ addAnimation }: { addAnimation: CallbackType }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const marqueeRef = useRef<HTMLDivElement>(null);
+
+  useLayoutEffect(() => {
+    let animation = gsap.timeline();
+
+    let ctx = gsap.context(() => {
+      gsap.set("#items-container > *", {
+        y: -10,
+        opacity: 0,
+      });
+
+      animation = gsap
+        .timeline()
+        .to("#items-container > *", {
+          duration: 0.75,
+          y: 0,
+          opacity: 1,
+          ease: "back",
+          stagger: 0.25,
+        })
+        .from(
+          "#marquee",
+          {
+            duration: 1,
+            opacity: 0,
+            ease: "back",
+          },
+          "<"
+        );
+    }, ref);
+
+    if (addAnimation) addAnimation(animation, "end");
+
+    return () => {
+      ctx.revert();
+    }; // cleanup
+  }, []);
+
+  useEffect(() => {
+    let mm = gsap.matchMedia(marqueeRef);
+
+    mm.add("(min-width: 0px)", (context) => {
+      screenshots.forEach((e, i) => {
+        gsap.to(`#${e.alt}`, {
+          x: -200,
+          ease: "back",
+          scrollTrigger: {
+            start: "top bottom", // the default values
+            end: "bottom top",
+            trigger: "#marquee",
+
+            scrub: 1,
+          },
+        });
+      });
+    });
+
+    mm.add("(min-width: 1024px)", (context) => {
+      screenshots.forEach((e, i) => {
+        gsap.to(`#${e.alt}`, {
+          x: -100,
+          ease: "back",
+          scrollTrigger: {
+            start: "top bottom", // the default values
+            end: "bottom+=100 top",
+            trigger: "#marquee",
+
+            scrub: 1,
+          },
+        });
+      });
+    });
+    return () => {
+      mm.revert();
+    };
+  }, []);
+
   return (
-    <div className="relative px-6 lg:px-8 isolate">
-      <div className="mx-auto max-w-3xl pt-48 pb-40">
-        <div>
-          <div>
-            {/* <h1 className="text-4xl font-bold tracking-tight sm:text-center sm:text-6xl">
-              We Generate{" "}
-              <span className="relative before:absolute before:-z-10 z-10 before:bg-lime-600 before:h-1/2 before:w-full before:bottom-3 before:-rotate-2">
-                Qualified Sales
-              </span>{" "}
-              Appointments For Construction Businesses
-            </h1> */}
-            <h1 className="text-4xl font-bold tracking-tight sm:text-center sm:text-6xl">
-              Digital Marketing for Businesses <br /> Boost Your Online Presence
-              and Attract More Leads
+    <>
+      <div ref={ref} className="relative px-6 lg:px-8 isolate">
+        <div className=" py-40 lg:py-96 ">
+          <div
+            id="items-container"
+            className="flex flex-col text-center max-w-screen-xl mx-auto justify-center items-center"
+          >
+            <h1 className="text-6xl sm:text-7xl lg:text-8xl  font-bold tracking-tight  max-w-2xl">
+              Better Approach to Digital Growth
             </h1>
-            <p className="mt-6 text-lg leading-8 text-gray-100 sm:text-center">
-              Stop buying low quality traffic from agencies that sell you
-              arbitrary marketing strategies that don&apos;t elevate your bottom
-              line. We build pipelines that generate qualified sales
-              appointments, every single day...
+            <p className="paragraph">
+              ⚡️ Elevate Your Brand&apos;s Online Visibility and Drive Results with Tailored Solutions
             </p>
-            <div className="mt-8 flex gap-x-4 sm:justify-center">
+            <div className="mt-8 flex flex-col lg:flex-row gap-3 justify-center">
               <a
                 href="#form"
-                className="inline-block rounded-lg bg-rose-600 px-4 py-1.5 text-base font-semibold leading-7 text-white shadow-sm ring-1 ring-rose-600 hover:bg-rose-700 hover:ring-rose-700"
+                className=" hover:-translate-y-1 text-center rounded-md transition-all inline-block bg-rose-500 p-2 text-lg font-semibold leading-7 text-white shadow-sm ring-1 ring-rose-500 hover:bg-rose-700 hover:ring-rose-700 lg:text-xl  lg:px-16 lg:py-3"
               >
-                Get started
-                <span className="text-rose-200" aria-hidden="true">
-                  &rarr;
-                </span>
+                Contact
+              </a>
+              <a
+                href="https://calendly.com/luke-blockhead/general-meeting"
+                className="  rounded-md transition-all inline-block bg-gray-50 p-2 text-lg font-semibold leading-7 text-black shadow-sm  hover:bg-gray-200 hover:ring-rose-700 lg:text-xl lg:px-16 lg:py-3"
+              >
+                <div className="flex gap-2 justify-center">
+                  <svg
+                    className="w-5 h-5 text-black self-center justify-self-center"
+                    width="800px"
+                    height="800px"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M3 10.312C3 5.93757 3.93757 5 8.312 5H15.688C20.0624 5 21 5.93757 21 10.312V15.688C21 20.0624 20.0624 21 15.688 21H8.312C3.93757 21 3 20.0624 3 15.688V10.312Z"
+                      stroke="#323232"
+                      stroke-width="2"
+                    />
+                    <path
+                      d="M6 5L6 3"
+                      stroke="#323232"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                    />
+                    <path
+                      d="M18 5L18 3"
+                      stroke="#323232"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                    />
+                    <path
+                      d="M3.5 9H20.5"
+                      stroke="#323232"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                    />
+                  </svg>
+                  <span>Book a meeting</span>
+                </div>
               </a>
             </div>
           </div>
@@ -62,6 +197,22 @@ export default function Hero() {
           </div>
         </div>
       </div>
-    </div>
+      {/* <div
+        className="mx-auto flex gap-2 lg:gap-5 overflow-x-hidden"
+        ref={marqueeRef}
+        id="marquee"
+      >
+        {screenshots.map((e) => (
+          <Image
+            key={e.alt}
+            id={e.alt}
+            src={e.screenshot}
+            alt={e.alt}
+            className="h-[200px] lg:h-[400px] object-contain"
+            placeholder="blur"
+          />
+        ))}
+      </div> */}
+    </>
   );
 }

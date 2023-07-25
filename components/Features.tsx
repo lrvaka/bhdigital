@@ -1,282 +1,256 @@
-import {
-  BoltIcon,
-  LockOpenIcon,
-  GlobeAltIcon,
-  ScaleIcon,
-  BanknotesIcon,
-} from "@heroicons/react/24/outline";
-import growthGraphic from "../public/growth-graphic.png";
+import { useEffect, useRef } from "react";
+import { gsap } from "../utils/gsap";
+import waveEmoji from "../public/waveEmoji.png";
 import Image from "next/image";
+import { useKeenSlider, KeenSliderPlugin } from "keen-slider/react";
+import "keen-slider/keen-slider.min.css";
 
-const transferFeatures = [
+const featureList = [
   {
-    id: 1,
-    name: "Connect our marketing system to your business",
-    description:
-      "We design ads, copy, sales pages, lead surveys, within a week! And we get you setup with a personalized backend CRM to manage your newly generated leads.",
-    icon: GlobeAltIcon,
+    title: "Lightning speed",
+    details:
+      "Our websites are built for speed. With every Core Web Vital metric being exceeded.",
+    icon: (
+      <svg
+        className=" w-24 h-32 self-center my-10"
+        width="161"
+        height="202"
+        viewBox="0 0 161 202"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          fill-rule="evenodd"
+          clip-rule="evenodd"
+          d="M41.0888 6.06639C42.7207 2.376 46.3571 0 50.3865 0H130.742C138.297 0 143.222 7.98741 139.838 14.7818L116.981 60.6639H150.808C159.874 60.6639 164.407 71.6643 158 78.0947L37.5933 198.947C29.998 206.571 17.3459 198.725 20.7507 188.503L46.4176 111.217H10.1737C8.4788 111.217 6.81078 110.792 5.32112 109.981C3.83147 109.169 2.56739 107.997 1.64369 106.571C0.719995 105.144 0.165949 103.509 0.0318818 101.813C-0.102186 100.117 0.187972 98.4147 0.875998 96.86L41.0888 6.06639Z"
+          fill="#F43F5E"
+        />
+      </svg>
+    ),
   },
   {
-    id: 2,
-    name: "We populate your calendar",
-    description:
-      "Within the first week, expect your calendar to be filled with qualified sales appointments - the key to growing your business!",
-    icon: ScaleIcon,
+    title: "Expert UX/UI",
+    details:
+      "Clean, sensical, sexy UX/UI design and development. We only make cool stuff - if it ain't cool, it ain't us.",
+    icon: (
+      <svg
+        className=" w-24 h-32 self-center my-10"
+        width="147"
+        height="141"
+        viewBox="0 0 147 141"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          fill-rule="evenodd"
+          clip-rule="evenodd"
+          d="M134.169 0C131.646 0 129.184 0.744625 127.091 2.14667L93.0131 24.8544C84.4619 30.557 76.642 37.2865 69.7284 44.8922C83.9293 51.5676 95.3536 62.992 102.029 77.1928C109.635 70.2771 116.365 62.455 122.067 53.9015L144.781 19.8298C146.06 17.9086 146.794 15.6765 146.905 13.3711C147.016 11.0658 146.499 8.77361 145.41 6.7387C144.321 4.7038 142.7 3.0024 140.721 1.81572C138.741 0.629039 136.477 0.00151934 134.169 0ZM78.4895 94.0844C82.8872 91.642 87.1345 88.9382 91.2085 85.9874C88.501 79.1389 84.4172 72.9187 79.2099 67.7113C74.0026 62.504 67.7823 58.4203 60.9338 55.7127C57.9831 59.7845 55.2793 64.0295 52.8369 68.425L50.9719 71.7792C56.7152 73.4316 61.9447 76.5156 66.17 80.742C70.3953 84.9685 73.4779 90.1988 75.1287 95.9426L78.4962 94.0777L78.4895 94.0844ZM41.265 80.5C34.5931 80.5 28.1945 83.1504 23.4768 87.8681C18.7591 92.5858 16.1087 98.9844 16.1087 105.656C16.1091 107.035 15.8261 108.399 15.2774 109.664C14.7286 110.929 13.9258 112.067 12.9188 113.009C11.9117 113.951 10.7219 114.675 9.42307 115.138C8.1243 115.601 6.74429 115.791 5.36869 115.699C4.45913 115.637 3.55005 115.825 2.73859 116.24C1.92713 116.655 1.24378 117.283 0.761558 118.057C0.279335 118.831 0.0163625 119.721 0.000739143 120.632C-0.0148842 121.544 0.217429 122.442 0.672855 123.232C4.54283 129.955 10.5241 135.212 17.6881 138.187C24.8521 141.162 32.7979 141.689 40.2919 139.686C47.7859 137.682 54.4089 133.261 59.1324 127.107C63.8559 120.954 66.4158 113.413 66.4145 105.656C66.4145 102.353 65.7638 99.0815 64.4996 96.0294C63.2354 92.9773 61.3824 90.2041 59.0464 87.8681C56.7105 85.5321 53.9373 83.6791 50.8852 82.4149C47.8331 81.1507 44.5685 80.5 41.265 80.5Z"
+          fill="#F43F5E"
+        />
+      </svg>
+    ),
   },
   {
-    id: 3,
-    name: "Growth",
-    description:
-      "With the systems in place & your calendar filled, you'll start experiencing the one thing digital marketing is meant to achieve - GROWTH! ",
-    icon: BoltIcon,
+    title: "Secure",
+    details:
+      "Headless, static generated websites have little to no entry points, making them secure by default.",
+    icon: (
+      <svg
+        className=" w-24 h-32 self-center my-10"
+        width="161"
+        height="212"
+        viewBox="0 0 161 212"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M80.5 161.139C85.8375 161.139 90.9564 159.017 94.7305 155.24C98.5047 151.462 100.625 146.339 100.625 140.997C100.625 135.655 98.5047 130.532 94.7305 126.754C90.9564 122.977 85.8375 120.855 80.5 120.855C75.1625 120.855 70.0436 122.977 66.2695 126.754C62.4953 130.532 60.375 135.655 60.375 140.997C60.375 146.339 62.4953 151.462 66.2695 155.24C70.0436 159.017 75.1625 161.139 80.5 161.139ZM140.875 70.4985C146.212 70.4985 151.331 72.6206 155.106 76.3981C158.88 80.1755 161 85.2988 161 90.6409V191.353C161 196.695 158.88 201.818 155.106 205.596C151.331 209.373 146.212 211.495 140.875 211.495H20.125C14.7875 211.495 9.66864 209.373 5.89447 205.596C2.12031 201.818 0 196.695 0 191.353V90.6409C0 85.2988 2.12031 80.1755 5.89447 76.3981C9.66864 72.6206 14.7875 70.4985 20.125 70.4985H30.1875V50.3561C30.1875 37.0008 35.4883 24.1925 44.9237 14.7489C54.3591 5.30536 67.1563 0 80.5 0C87.1071 0 93.6496 1.3025 99.7538 3.83313C105.858 6.36376 111.404 10.073 116.076 14.7489C120.748 19.4249 124.454 24.9761 126.983 31.0856C129.511 37.1951 130.812 43.7432 130.812 50.3561V70.4985H140.875ZM80.5 20.1424C72.4938 20.1424 64.8155 23.3256 59.1542 28.9918C53.493 34.6579 50.3125 42.3429 50.3125 50.3561V70.4985H110.688V50.3561C110.688 42.3429 107.507 34.6579 101.846 28.9918C96.1845 23.3256 88.5062 20.1424 80.5 20.1424Z"
+          fill="#F43F5E"
+        />
+      </svg>
+    ),
+  },
+  {
+    title: "Design at pace ",
+    details:
+      "Thanks to libraries like TailwindCSS, we rapidly develop composable and scalable UI components.",
+    icon: (
+      <svg
+        className=" w-24 h-32 self-center my-10"
+        width="161"
+        height="97"
+        viewBox="0 0 161 97"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M80.5 0C59.0065 0 45.6435 10.7065 40.25 32.2C48.3 21.4935 57.7185 17.4685 68.425 20.125C74.543 21.6545 78.9705 26.082 83.8005 30.9925C91.6895 39.0425 100.625 48.3 120.75 48.3C142.244 48.3 155.607 37.5935 161 16.1C152.95 26.8065 143.532 30.8315 132.825 28.175C126.707 26.6455 122.36 22.218 117.45 17.3075C109.561 9.2575 100.625 0 80.5 0ZM40.25 48.3C18.7565 48.3 5.3935 59.0065 0 80.5C8.05 69.7935 17.4685 65.7685 28.175 68.425C34.293 69.9545 38.64 74.382 43.5505 79.2925C51.4395 87.3425 60.375 96.6 80.5 96.6C101.994 96.6 115.357 85.8935 120.75 64.4C112.7 75.1065 103.282 79.1315 92.575 76.475C86.457 74.9455 82.11 70.518 77.1995 65.6075C69.3105 57.5575 60.375 48.3 40.25 48.3Z"
+          fill="#F43F5E"
+        />
+      </svg>
+    ),
+  },
+  {
+    title: "Next-gen tech",
+    details:
+      "Latest and greatest technologies like NextJS - build once and don't worry about updates for years to come!",
+    icon: (
+      <svg
+        className=" w-24 h-32 self-center my-10"
+        width="161"
+        height="162"
+        viewBox="0 0 161 162"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          fill-rule="evenodd"
+          clip-rule="evenodd"
+          d="M2.31698e-06 80.497C0.000518545 66.6063 3.59544 52.952 10.4352 40.8619C17.275 28.7718 27.1269 18.6574 39.0329 11.502C50.9389 4.34658 64.4939 0.393783 78.3798 0.027931C92.2657 -0.337921 106.01 2.89562 118.276 9.41415C130.543 15.9327 140.913 25.5143 148.38 37.2275C155.847 48.9406 160.156 62.3866 160.888 76.2581C161.62 90.1295 158.75 103.954 152.557 116.388C146.365 128.822 137.06 139.442 125.548 147.215L52.6685 45.1843C52.0081 44.259 51.071 43.5672 49.9921 43.2087C48.9132 42.8503 47.7484 42.8437 46.6656 43.1899C45.5827 43.5361 44.6378 44.2173 43.9671 45.1351C43.2963 46.053 42.9343 47.1602 42.9333 48.297V128.797H53.6667V65.041L116.242 152.646C103.967 158.729 90.3437 161.578 76.6603 160.925C62.977 160.271 49.6868 156.137 38.0476 148.913C26.4084 141.688 16.8053 131.613 10.1474 119.641C3.48936 107.669 -0.00328399 94.1959 2.31698e-06 80.497ZM107.333 107.33V42.9303H118.067V107.33H107.333Z"
+          fill="#F43F5E"
+        />
+      </svg>
+    ),
+  },
+  {
+    title: "Seamless CI/CD",
+    details:
+      "Hosting on Vercel - whether your website is serving 1 user or 1 million, your websites are guaranteed to be secure and efficient.",
+    icon: (
+      <svg
+        className=" w-24 h-32 self-center my-10"
+        width="171"
+        height="165"
+        viewBox="0 0 171 165"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M67.6111 22.2038L85.5 5M49.7222 116.825L121.278 48.0095M85.5 159.834L103.389 142.63M125.75 142.63C131.681 142.63 137.368 140.365 141.562 136.332C145.755 132.299 148.111 126.829 148.111 121.126C148.111 115.422 145.755 109.952 141.562 105.919C137.368 101.886 131.681 99.6208 125.75 99.6208C119.819 99.6208 114.132 101.886 109.938 105.919C105.745 109.952 103.389 115.422 103.389 121.126C103.389 126.829 105.745 132.299 109.938 136.332C114.132 140.365 119.819 142.63 125.75 142.63ZM45.25 65.2132C51.1805 65.2132 56.8682 62.9476 61.0617 58.9147C65.2552 54.8817 67.6111 49.4119 67.6111 43.7085C67.6111 38.0051 65.2552 32.5353 61.0617 28.5024C56.8682 24.4695 51.1805 22.2038 45.25 22.2038C39.3195 22.2038 33.6318 24.4695 29.4383 28.5024C25.2448 32.5353 22.8889 38.0051 22.8889 43.7085C22.8889 49.4119 25.2448 54.8817 29.4383 58.9147C33.6318 62.9476 39.3195 65.2132 45.25 65.2132ZM27.3611 159.834C33.2916 159.834 38.9793 157.568 43.1728 153.535C47.3663 149.503 49.7222 144.033 49.7222 138.329C49.7222 132.626 47.3663 127.156 43.1728 123.123C38.9793 119.09 33.2916 116.825 27.3611 116.825C21.4306 116.825 15.7429 119.09 11.5494 123.123C7.3559 127.156 5 132.626 5 138.329C5 144.033 7.3559 149.503 11.5494 153.535C15.7429 157.568 21.4306 159.834 27.3611 159.834ZM143.639 48.0095C149.569 48.0095 155.257 45.7438 159.451 41.7109C163.644 37.6779 166 32.2081 166 26.5047C166 20.8013 163.644 15.3315 159.451 11.2986C155.257 7.26567 149.569 5 143.639 5C137.708 5 132.021 7.26567 127.827 11.2986C123.634 15.3315 121.278 20.8013 121.278 26.5047C121.278 32.2081 123.634 37.6779 127.827 41.7109C132.021 45.7438 137.708 48.0095 143.639 48.0095Z"
+          stroke="#F43F5E"
+          stroke-width="10"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+      </svg>
+    ),
+  },
+  {
+    title: "Built to scale",
+    details:
+      "Component-based, modular applications that allow for seamless and scalable solutions.",
+    icon: (
+      <svg
+        className=" w-24 h-32 self-center my-10"
+        width="161"
+        height="175"
+        viewBox="0 0 161 175"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M161 107.564V163.564C161 166.349 159.894 169.019 157.925 170.989C155.955 172.958 153.285 174.064 150.5 174.064H10.5C7.71523 174.064 5.04451 172.958 3.07538 170.989C1.10625 169.019 0 166.349 0 163.564V107.564C0 104.779 1.10625 102.108 3.07538 100.139C5.04451 98.1702 7.71523 97.0639 10.5 97.0639C13.2848 97.0639 15.9555 98.1702 17.9246 100.139C19.8938 102.108 21 104.779 21 107.564V153.064H140V107.564C140 104.779 141.106 102.108 143.075 100.139C145.045 98.1702 147.715 97.0639 150.5 97.0639C153.285 97.0639 155.955 98.1702 157.925 100.139C159.894 102.108 161 104.779 161 107.564ZM45.5 135.564H115.5C118.285 135.564 120.955 134.458 122.925 132.489C124.894 130.519 126 127.849 126 125.064C126 122.279 124.894 119.608 122.925 117.639C120.955 115.67 118.285 114.564 115.5 114.564H45.5C42.7152 114.564 40.0445 115.67 38.0754 117.639C36.1062 119.608 35 122.279 35 125.064C35 127.849 36.1062 130.519 38.0754 132.489C40.0445 134.458 42.7152 135.564 45.5 135.564ZM52.675 73.8764L118.475 97.8514C119.623 98.2739 120.839 98.4815 122.062 98.464C124.541 98.4767 126.944 97.6123 128.847 96.0237C130.749 94.4352 132.028 92.2248 132.458 89.7838C132.887 87.3428 132.439 84.8285 131.194 82.6859C129.948 80.5433 127.984 78.9105 125.65 78.0764L59.85 54.1889C58.535 53.6087 57.115 53.3047 55.6777 53.2956C54.2405 53.2865 52.8167 53.5725 51.4945 54.136C50.1723 54.6996 48.9799 55.5285 47.9911 56.5716C47.0023 57.6147 46.2381 58.8496 45.746 60.2C45.2539 61.5504 45.0442 62.9874 45.13 64.4221C45.2158 65.8568 45.5952 67.2587 46.2448 68.5408C46.8943 69.8229 47.8002 70.958 48.9063 71.8758C50.0124 72.7936 51.2951 73.4745 52.675 73.8764ZM80.5 18.4014L134.137 63.3764C136.019 64.9716 138.409 65.8407 140.875 65.8264C142.408 65.8142 143.921 65.4719 145.31 64.8226C146.699 64.1733 147.932 63.2324 148.925 62.0639C149.82 61.0117 150.498 59.7916 150.917 58.475C151.336 57.1584 151.489 55.7715 151.367 54.3952C151.245 53.0189 150.85 51.6806 150.205 50.4584C149.561 49.2362 148.679 48.1546 147.613 47.2764L93.975 2.30145C91.8319 0.586682 89.1026 -0.220766 86.3715 0.0520163C83.6404 0.324799 81.1247 1.65613 79.3631 3.76089C77.6015 5.86566 76.734 8.57653 76.9465 11.313C77.159 14.0494 78.4346 16.5939 80.5 18.4014Z"
+          fill="#F43F5E"
+        />
+      </svg>
+    ),
   },
 ];
-const communicationFeatures = [
-  {
-    id: 1,
-    name: "No contracts",
-    description:
-      "We don't lock you into a 6-12 month contract like many agencies. Just pay the monthly retainer if you want to continue working with us, stop when you don't! We're confident that our results speaks for itself.",
-    icon: LockOpenIcon,
-  },
-  {
-    id: 2,
-    name: "First month FREE!",
-    description:
-      "That's right, first month free of charge! - just send over the adspend and we'll work our magic!",
-    icon: BanknotesIcon,
-  },
-];
 
-export default function Features() {
+const Features = () => {
+  const ref = useRef<HTMLDivElement>(null);
+  const [sliderRef] = useKeenSlider({
+    loop: false,
+    mode: "free",
+
+    slides: {
+      perView: 1.25,
+      spacing: 10,
+    },
+
+    breakpoints: {
+      "(min-width: 1000px)": {
+        slides: { perView: 3.25, spacing: 20 },
+      },
+    },
+  });
+
+  useEffect(() => {
+    let context = gsap.context(() => {
+      gsap.set("#feature-container > *", { opacity: 0 });
+      gsap.set("#wave-emoji", { x: -10 });
+
+      gsap.to("#feature-container > *", {
+        duration: 2,
+        opacity: 1,
+        ease: "back",
+        stagger: 0.25,
+        scrollTrigger: "#feature-container",
+      });
+
+      gsap.to("#wave-emoji", {
+        rotate: "-5deg",
+        yoyo: true,
+        repeat: Infinity,
+      });
+    }, ref);
+
+    return () => {
+      context.revert();
+    };
+  }, []);
+
   return (
-    <div className="overflow-hidden py-16 lg:py-24">
-      <div className="relative mx-auto max-w-xl px-6 lg:max-w-7xl lg:px-8">
-        <svg
-          className="absolute left-full hidden -translate-x-1/2 -translate-y-1/4 transform lg:block"
-          width={404}
-          height={784}
-          fill="none"
-          viewBox="0 0 404 784"
-          aria-hidden="true"
+    <div ref={ref} className="relative py-20 lg:py-32">
+      <div className="  px-4 lg:px-8   max-w-screen-xl mx-auto ">
+        <div
+          id="feature-container"
+          ref={sliderRef}
+          onMouseUp={(e) => {
+            const target = e.target as Element;
+            target.classList.remove("cursor-grabbing");
+          }}
+          onMouseDown={(e) => {
+            const target = e.target as Element;
+            target.classList.add("cursor-grabbing");
+          }}
+          className="keen-slider cursor-grab "
         >
-          <defs>
-            <pattern
-              id="b1e6e422-73f8-40a6-b5d9-c8586e37e0e7"
-              x={0}
-              y={0}
-              width={20}
-              height={20}
-              patternUnits="userSpaceOnUse"
+          {featureList.map((e, i) => (
+            <div
+              id="feature-item"
+              key={e.title}
+              className="keen-slider__slide glass-morph-1 rounded-md px-6 py-6 flex flex-col"
             >
-              <rect
-                x={0}
-                y={0}
-                width={4}
-                height={4}
-                className="text-gray-200"
-                fill="currentColor"
+              {e.icon}
+              <div>
+                <h3 className="text-xl lg:text-2xl">{e.title}</h3>
+                <p className="text-gray-400 text-md lg:text-lg">{e.details}</p>
+              </div>
+            </div>
+          ))}
+
+          <div className="keen-slider__slide glass-morph-1 glass-morph-1 rounded-md px-6 py-6 flex flex-col justify-between">
+            <div className="flex-1 self-center  flex">
+              <Image
+                id="wave-emoji"
+                alt="wave emoji"
+                src={waveEmoji}
+                className=" object-contain self-center "
               />
-            </pattern>
-          </defs>
-          <rect
-            width={404}
-            height={784}
-            fill="url(#b1e6e422-73f8-40a6-b5d9-c8586e37e0e7)"
-          />
-        </svg>
-
-        <div className="relative max-w-prose mx-auto">
-          <h2 className="text-center text-3xl font-bold leading-8 tracking-tight white sm:text-4xl">
-            Marketing strategies that work
-          </h2>
-          <p className="mx-auto mt-4 max-w-3xl text-center text-xl text-gray-400">
-            As a growing business, your success is dependent on the number
-            of qualified sales appointments booked into your calendar. We use
-            strategies that directly lead to sales!
-          </p>
-        </div>
-
-        <div className="relative mt-12 lg:mt-24 lg:grid lg:grid-cols-2 lg:items-center lg:gap-8">
-          <div className="relative max-w-prose">
-            <h3 className="text-2xl font-bold tracking-tight white sm:text-3xl">
-              A system tailored to you
-            </h3>
-            <p className="mt-3 text-lg text-gray-400">
-              We use strategies/systems that are tailored to generating
-              qualified traffic, leads and sales!
-            </p>
-
-            <dl className="mt-10 space-y-10 ">
-              {transferFeatures.map((item) => (
-                <div key={item.id} className="relative">
-                  <dt>
-                    <div className="absolute flex h-12 w-12 items-center justify-center rounded-xl bg-rose-500 text-white">
-                      <span className="font-black" aria-hidden="true">
-                        {item.id}
-                      </span>
-                    </div>
-                    <p className="ml-16 text-lg font-medium leading-6 text-gray-100">
-                      {item.name}
-                    </p>
-                  </dt>
-                  <dd className="mt-2 ml-16 text-base text-gray-400">
-                    {item.description}
-                  </dd>
-                </div>
-              ))}
-            </dl>
-          </div>
-
-          <div className="relative mt-10 lg:mt-0" aria-hidden="true">
-            <svg
-              className="absolute left-1/2 -translate-x-1/2 translate-y-16 transform lg:hidden"
-              width={784}
-              height={404}
-              fill="none"
-              viewBox="0 0 784 404"
-            >
-              <defs>
-                <pattern
-                  id="ca9667ae-9f92-4be7-abcb-9e3d727f2941"
-                  x={0}
-                  y={0}
-                  width={20}
-                  height={20}
-                  patternUnits="userSpaceOnUse"
-                >
-                  <rect
-                    x={0}
-                    y={0}
-                    width={4}
-                    height={4}
-                    className="text-gray-200"
-                    fill="currentColor"
-                  />
-                </pattern>
-              </defs>
-              <rect
-                width={784}
-                height={404}
-                fill="url(#ca9667ae-9f92-4be7-abcb-9e3d727f2941)"
-              />
-            </svg>
-            <Image className="relative mx-auto" src={growthGraphic} alt="" />
-          </div>
-        </div>
-
-        <svg
-          className="absolute right-full hidden translate-x-1/2 translate-y-12 transform lg:block"
-          width={404}
-          height={784}
-          fill="none"
-          viewBox="0 0 404 784"
-          aria-hidden="true"
-        >
-          <defs>
-            <pattern
-              id="64e643ad-2176-4f86-b3d7-f2c5da3b6a6d"
-              x={0}
-              y={0}
-              width={20}
-              height={20}
-              patternUnits="userSpaceOnUse"
-            >
-              <rect
-                x={0}
-                y={0}
-                width={4}
-                height={4}
-                className="text-gray-200"
-                fill="currentColor"
-              />
-            </pattern>
-          </defs>
-          <rect
-            width={404}
-            height={784}
-            fill="url(#64e643ad-2176-4f86-b3d7-f2c5da3b6a6d)"
-          />
-        </svg>
-
-        <div className="relative mt-32 sm:mt-16 lg:mt-24">
-          <div className="lg:grid lg:grid-flow-row-dense lg:grid-cols-2 lg:items-center lg:gap-8">
-            <div className="lg:col-start-2 max-w-prose">
-              <h3 className="text-2xl font-bold tracking-tight text-white sm:text-3xl">
-                We build partnerships
-              </h3>
-              <p className="mt-3 text-lg text-gray-400">
-                We don&apos;t just want &quot;clients&quot; - we build
-                partnerships, we work with people that we share a mutual trust
-                with. If you win, we win.
-              </p>
-
-              <dl className="mt-10 space-y-10 ">
-                {communicationFeatures.map((item) => (
-                  <div key={item.id} className="relative">
-                    <dt>
-                      <div className="absolute flex h-12 w-12 items-center justify-center rounded-xl bg-rose-500 text-white">
-                        <item.icon className="h-8 w-8" aria-hidden="true" />
-                      </div>
-                      <p className="ml-16 text-lg font-medium leading-6 text-gray-100">
-                        {item.name}
-                      </p>
-                    </dt>
-                    <dd className="mt-2 ml-16 text-base text-gray-400">
-                      {item.description}
-                    </dd>
-                  </div>
-                ))}
-              </dl>
             </div>
 
-            <div className="relative mt-10 lg:col-start-1 lg:mt-0">
-              <svg
-                className="absolute left-1/2 -translate-x-1/2 translate-y-16 transform lg:hidden"
-                width={784}
-                height={404}
-                fill="none"
-                viewBox="0 0 784 404"
-                aria-hidden="true"
-              >
-                <defs>
-                  <pattern
-                    id="e80155a9-dfde-425a-b5ea-1f6fadd20131"
-                    x={0}
-                    y={0}
-                    width={20}
-                    height={20}
-                    patternUnits="userSpaceOnUse"
-                  >
-                    <rect
-                      x={0}
-                      y={0}
-                      width={4}
-                      height={4}
-                      className="text-gray-200"
-                      fill="currentColor"
-                    />
-                  </pattern>
-                </defs>
-                <rect
-                  width={784}
-                  height={404}
-                  fill="url(#e80155a9-dfde-425a-b5ea-1f6fadd20131)"
-                />
-              </svg>
-              <svg
-                className=" fill-rose-200"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 560 420"
-              >
-                <path d="M238 39.88c2.92 3.83 8.38 4.6 12.25 1.73 1.86-1.37 3.08-3.42 3.41-5.7s-.27-4.6-1.66-6.43l-13.12-17.34c-2.92-3.83-8.38-4.61-12.25-1.73-1.86 1.37-3.08 3.42-3.41 5.7s.27 4.6 1.66 6.43L238 39.88ZM309.75 41.61c3.87 2.87 9.33 2.1 12.25-1.73l13.12-17.34c1.39-1.84 1.99-4.16 1.66-6.44s-1.55-4.34-3.41-5.7c-3.87-2.86-9.32-2.09-12.25 1.73L308 29.47c-1.39 1.84-1.99 4.15-1.66 6.43s1.55 4.34 3.41 5.7ZM280 43.34c4.81.02 8.73-3.86 8.75-8.67v-26C288.7 3.87 284.8 0 280 0s-8.7 3.87-8.75 8.67v26.01c.02 4.81 3.94 8.69 8.75 8.67ZM281.86 354.07l-10.12-9.96a26.352 26.352 0 0 0-17.27-7.47 25.644 25.644 0 0 0-7.68-17.09l-10.13-9.97a26.33 26.33 0 0 0-17.27-7.45 25.657 25.657 0 0 0-7.69-17.11l-10.12-9.96a26.352 26.352 0 0 0-17.27-7.47 25.644 25.644 0 0 0-7.68-17.09l-10.13-9.97c-4.99-4.86-11.68-7.59-18.64-7.59s-13.66 2.72-18.65 7.59l-21.82 21.48c-4.96 4.85-7.75 11.5-7.75 18.43s2.8 13.58 7.75 18.43l10.13 9.97a26.39 26.39 0 0 0 17.27 7.46c.31 6.46 3.06 12.57 7.68 17.1l10.13 9.97a26.39 26.39 0 0 0 17.27 7.46c.31 6.46 3.06 12.57 7.69 17.1l10.13 9.97a26.386 26.386 0 0 0 17.26 7.46 25.7 25.7 0 0 0 7.69 17.1l10.13 9.97c4.98 4.87 11.68 7.59 18.64 7.59s13.66-2.72 18.64-7.59l21.82-21.48c4.96-4.85 7.75-11.5 7.75-18.43 0-6.94-2.79-13.58-7.75-18.43Zm-162.14-67.52c-1.65-1.61-2.59-3.82-2.59-6.13s.93-4.52 2.59-6.13l21.82-21.48c3.5-3.43 9.11-3.43 12.61 0l10.13 9.97c1.66 1.61 2.59 3.82 2.59 6.13s-.93 4.52-2.59 6.13l-21.82 21.48a9.044 9.044 0 0 1-12.62 0l-10.13-9.97Zm35.08 34.53c-1.65-1.61-2.59-3.82-2.59-6.13s.93-4.52 2.59-6.13l21.82-21.48a9.022 9.022 0 0 1 12.61 0l10.13 9.97c1.65 1.61 2.59 3.82 2.59 6.13s-.93 4.52-2.59 6.13l-21.82 21.48a9.032 9.032 0 0 1-12.61 0l-10.13-9.97Zm45.21 44.5-10.13-9.97c-1.65-1.61-2.59-3.82-2.59-6.13s.93-4.52 2.59-6.13l21.82-21.48c3.51-3.43 9.11-3.43 12.61 0l10.13 9.97c1.66 1.61 2.59 3.82 2.59 6.13s-.93 4.52-2.59 6.13l-21.82 21.48a9.044 9.044 0 0 1-12.62 0Zm69.52 13.05-21.82 21.48a9.025 9.025 0 0 1-12.62 0l-10.13-9.97c-1.65-1.61-2.59-3.82-2.59-6.13s.93-4.52 2.59-6.13l21.82-21.48c3.51-3.42 9.11-3.42 12.61 0l10.13 9.97c1.65 1.61 2.58 3.82 2.58 6.13s-.93 4.52-2.58 6.13Z" />
-                <path d="M338.14 162c-.58.7-12.22 12.41-12.22 12.41l107.21 105.54c3.36 3.23 5.28 7.68 5.31 12.34a14.89 14.89 0 0 1-4.43 10.75 16.95 16.95 0 0 1-11.99 4.37c-4.41-.16-8.59-2.04-11.63-5.23l-.29-.29-.02-.02-74.21-73.05c-3.44-3.38-8.96-3.36-12.38.04a8.581 8.581 0 0 0-2.54 6.14c0 2.3.94 4.51 2.58 6.12l74.23 73.06a18.13 18.13 0 0 1 5.52 12.76 14.69 14.69 0 0 1-4.35 10.62 17.195 17.195 0 0 1-23.93-1.17l-74.82-73.64c-3.44-3.38-8.96-3.36-12.38.04a8.581 8.581 0 0 0-2.54 6.14c0 2.3.94 4.51 2.58 6.12l68.97 67.89c3.47 3.35 5.46 7.95 5.54 12.77.04 3.98-1.52 7.81-4.35 10.62a17.195 17.195 0 0 1-23.93-1.17l-72.11-70.96-2.72-2.68c-3.44-3.38-8.96-3.36-12.38.04a8.605 8.605 0 0 0 .05 12.26l66.5 65.45c3.3 3.18 5.18 7.57 5.21 12.15a15 15 0 0 1-4.47 10.8c-3.77 3.6-9.06 5.13-14.17 4.09l-12.69 13.88a35.24 35.24 0 0 0 15.8 3.77 33.12 33.12 0 0 0 23.39-9.44 32.001 32.001 0 0 0 9.27-18.48c3.66 1.25 7.5 1.89 11.37 1.9 8.66.08 17-3.27 23.21-9.32a31.763 31.763 0 0 0 9.4-20.49c2.72.67 5.52 1.02 8.32 1.03 8.66.07 17-3.27 23.2-9.32a31.89 31.89 0 0 0 9.52-22.92c0-.77-.07-1.55-.12-2.32.78.05 1.57.11 2.35.11 8.71.06 17.1-3.32 23.34-9.4a32.108 32.108 0 0 0 9.6-23.05c-.02-9.29-3.8-18.18-10.48-24.64L338.13 161.97ZM108.37 236.52l13.01-11.64-34.2-33.66L191.56 88.48l10.98 10.81a25.305 25.305 0 0 0 17.79 7.29l24.43.07 16.39-16.14c-2.35-.74-4.79-1.14-7.25-1.18l-33.54-.09c-2.06 0-4.04-.8-5.5-2.25l-13.7-13.48c2.16-8.82-.51-18.12-7.02-24.44l-33.52-32.99c-4.99-4.86-11.68-7.59-18.65-7.59s-13.66 2.72-18.65 7.59l-8.4 8.27L96.77 6.44c-3.44-3.38-8.96-3.36-12.38.04a8.581 8.581 0 0 0-2.54 6.14c0 2.3.94 4.51 2.58 6.12l18.11 17.83-69.43 68.34L14.92 87c-3.44-3.38-8.96-3.36-12.38.04A8.681 8.681 0 0 0 0 93.18c0 2.3.94 4.51 2.58 6.12l18.11 17.83-8.32 8.19c-4.96 4.85-7.75 11.49-7.75 18.43s2.79 13.58 7.75 18.43l33.52 32.99a26.504 26.504 0 0 0 18.64 7.59c2.77-.04 5.51-.5 8.13-1.38l35.7 35.14Zm-50.14-53.65-33.52-32.99c-3.38-3.39-3.38-8.88 0-12.26L135.69 28.38c3.51-3.43 9.11-3.42 12.62 0l33.52 32.98c1.63 1.62 2.55 3.83 2.55 6.13s-.92 4.51-2.55 6.13L70.85 182.86c-3.51 3.42-9.11 3.42-12.61 0Z" />
-                <path d="M557.46 90.17c-3.42-3.4-8.93-3.41-12.38-.04l-17.2 16.93-69.44-68.35 17.12-16.85a8.662 8.662 0 0 0 2.58-6.13c0-2.3-.91-4.52-2.54-6.14a8.806 8.806 0 0 0-12.38-.04l-17.2 16.93-8.4-8.27c-4.99-4.86-11.68-7.59-18.64-7.59s-13.65 2.72-18.64 7.59L366.82 51.2a25.684 25.684 0 0 0-7.75 18.42l-15.74 15.5a7.905 7.905 0 0 1-6.18 2.22l-32.57-2.69a25.473 25.473 0 0 0-19.97 7.2l-57.11 56.21a24.725 24.725 0 0 0-7.04 13.3l-9.32 51.73a24.475 24.475 0 0 0 6.58 21.57 25.159 25.159 0 0 0 18.22 7.75c1.15 0 2.3-.08 3.43-.23l14.69-1.93c6.98-.93 13.28-4.71 17.39-10.43 6.08-8.5 15.83-24.79 16.26-42.25l36.34-35.77a8.639 8.639 0 0 0 2.58-6.12c0-2.3-.91-4.52-2.54-6.14-3.42-3.4-8.94-3.42-12.38-.04l-38.98 38.36a8.657 8.657 0 0 0-2.57 6.69c.85 13.67-7.78 27.95-13 35.25a7.886 7.886 0 0 1-5.41 3.27L237.07 225c-2.48.34-4.97-.52-6.7-2.32a7.438 7.438 0 0 1-2-6.54l9.32-51.73a7.49 7.49 0 0 1 2.14-4.04l57.11-56.21a7.847 7.847 0 0 1 6.18-2.22l32.57 2.69c7.39.64 14.69-2 19.97-7.2l10.37-10.21c.26.28.51.58.79.85l109.41 107.7-39.48 38.86 12.41 12.22 43.03-42.35c1.4.24 2.82.38 4.25.4 6.97.02 13.67-2.71 18.65-7.59l33.52-32.99c4.96-4.85 7.75-11.49 7.75-18.43s-2.79-13.58-7.75-18.43l-8.32-8.19 17.12-16.85a8.639 8.639 0 0 0 2.58-6.12c0-2.3-.91-4.51-2.54-6.14Zm-21.18 61.86-33.51 32.99a9.044 9.044 0 0 1-12.62 0L379.17 75.78c-1.63-1.62-2.55-3.83-2.55-6.13s.92-4.51 2.55-6.13l33.52-32.99c3.53-3.37 9.09-3.37 12.61 0l110.98 109.24c1.63 1.62 2.55 3.83 2.55 6.13s-.92 4.51-2.55 6.13Z" />
-              </svg>
-            </div>
+            <a
+              href="#form"
+              className=" text-center rounded-md transition-all inline-block bg-rose-500 p-2 text-lg font-semibold leading-7 text-white shadow-sm ring-1 ring-rose-500 hover:bg-rose-700 hover:ring-rose-700 lg:text-xl  lg:px-16 lg:py-3"
+            >
+              Let&apos;s get digital!
+            </a>
           </div>
         </div>
       </div>
     </div>
   );
-}
+};
+
+export default Features;
