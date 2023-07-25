@@ -1,4 +1,3 @@
-import type { NextPage } from "next";
 import { useRef } from "react";
 import HeroBackground from "../components/HeroBackground";
 import useIsomorphicLayoutEffect from "../hooks/useIsomorphicLayoutEffect";
@@ -8,7 +7,6 @@ import MainFeatures from "../components/MainFeatures";
 import Hero from "../components/Hero";
 import Footer from "../components/Footer";
 import CTA from "../components/CTA";
-import Form from "../components/Form/Form";
 import Features from "../components/Features";
 import ContactSection from "../components/ContactSection";
 import ExtraFeatures from "../components/ExtraFeatures";
