@@ -49,7 +49,7 @@ const worksList = [
   },
   {
     name: "Doug'll Do It",
-    tags: ["Web Design/Dev", "Social Media Management", "Branding"],
+    tags: ["Web Design/Dev", "Branding"],
     alt: "doug'll do it screenshot",
     desc: "Our team successfully enhanced CatMobStaz's digital presence through web design/development, social media management, and branding, resulting in a sleek website and strong social media presence that showcases their purrfect NFTs.",
     matCap: "./matcaps/mobMat.png",
