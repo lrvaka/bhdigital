@@ -15,6 +15,7 @@
     "@react-three/drei": "^9.36.0",
     "@react-three/fiber": "^8.8.10",
     "@sanity/image-url": "^1.0.2",
+    "@sanity/types": "^3.14.4",
     "@tailwindcss/line-clamp": "^0.4.2",
     "date-fns": "^2.29.3",
     "gsap": "npm:@gsap/business@^3.11.3",

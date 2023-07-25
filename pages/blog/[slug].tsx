@@ -1,17 +1,62 @@
 import client from "../../helpers/sanity";
-import BlogLayout from "../../components/layouts/BlogLayout";
 import { PortableText } from "@portabletext/react";
 import { parseISO, format } from "date-fns";
-import { useNextSanityImage } from "next-sanity-image";
+import { useNextSanityImage, UseNextSanityImageProps } from "next-sanity-image";
 import imageUrlBuilder from "@sanity/image-url";
 import Image from "next/image";
 import Container from "../../components/ui/Container";
 import Navbar from "../../components/ui/Navbar";
+import { useEffect } from "react";
+import { Slug } from "@sanity/types";
 
 const builder = imageUrlBuilder(client);
 
-const ImageComponent = ({ value }) => {
-  const imageProps = useNextSanityImage(client, value);
+interface Params {
+  slug: {
+    current: string;
+  };
+}
+
+interface ImageMeta {
+  blurhash?: string;
+  lqip?: string;
+  palette?: any; // Replace with the proper type
+  exif?: any; // Replace with the proper type
+  location?: any; // Replace with the proper type
+}
+
+interface Image {
+  asset: {
+    _ref: string;
+  };
+  alt?: string;
+  metadata?: ImageMeta;
+}
+
+interface Block {
+  _type: "block";
+  children: { _key: string; _type: "span"; marks: string[]; text: string }[];
+  markDefs: any[]; // Replace with the proper type if you have a specific type for markDefs
+  style: string;
+}
+
+interface BlogPost {
+  _id: string;
+  _type: "blogPost";
+  title: string;
+  slug: Slug;
+  publishedAt: string;
+  mainImage: Image;
+  excerpt?: string;
+  body: Array<Block | Image>;
+  author: string; // Replace with an Author type if you have an author schema.
+  views?: number;
+  likes?: number;
+  categories?: string[];
+}
+
+const ImageComponent = ({ value }: any) => {
+  const imageProps: any = useNextSanityImage(client, value);
 
   return (
     <Image
@@ -29,8 +74,8 @@ const components = {
   },
 };
 
-export default function Post({ post }) {
-  const mainImageProps = useNextSanityImage(client, post.mainImage);
+export default function Post({ post }: { post: any }) {
+  const mainImageProps: any = useNextSanityImage(client, post.mainImage);
 
   const meta = {
     title: post.title,
@@ -80,7 +125,7 @@ export default function Post({ post }) {
 
 export const getStaticPaths = async () => {
   const posts = await client.fetch(`*[_type == "blogPost"]`);
-  const paths = posts.map((post) => ({
+  const paths = posts.map((post: BlogPost) => ({
     params: { slug: post.slug.current },
   }));
   return {
@@ -89,7 +134,7 @@ export const getStaticPaths = async () => {
   };
 };
 
-export const getStaticProps = async ({ params }) => {
+export const getStaticProps = async (params: Params) => {
   const post = await client.fetch(
     `
   *[_type == "blogPost" && slug.current == $slug][0]

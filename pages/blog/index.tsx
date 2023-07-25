@@ -1,11 +1,49 @@
 import PostCard from "../../components/PostCard";
-import BlogLayout from "../../components/layouts/BlogLayout";
 import client from "../../helpers/sanity";
 import { parseISO, format } from "date-fns";
 import Container from "../../components/ui/Container";
 import Navbar from "../../components/ui/Navbar";
+import { Slug } from "@sanity/types";
 
-export default function Blog({ posts }) {
+interface ImageMeta {
+  blurhash?: string;
+  lqip?: string;
+  palette?: any; // Replace with the proper type
+  exif?: any; // Replace with the proper type
+  location?: any; // Replace with the proper type
+}
+
+interface Image {
+  asset: {
+    _ref: string;
+  };
+  alt?: string;
+  metadata?: ImageMeta;
+}
+
+interface Block {
+  _type: "block";
+  children: { _key: string; _type: "span"; marks: string[]; text: string }[];
+  markDefs: any[]; // Replace with the proper type if you have a specific type for markDefs
+  style: string;
+}
+
+interface BlogPost {
+  _id: string;
+  _type: "blogPost";
+  title: string;
+  slug: Slug;
+  publishedAt: string;
+  mainImage: Image;
+  excerpt?: string;
+  body: Array<Block | Image>;
+  author: string; // Replace with an Author type if you have an author schema.
+  views?: number;
+  likes?: number;
+  categories?: string[];
+}
+
+export default function Blog({ posts }: { posts: BlogPost[] }) {
   const meta = {
     title: "Blog - Blockhead Digital",
     description: "Learn about everything Blockhead Digital and technology",

@@ -1,5 +1,5 @@
 import { gsap } from "gsap";
-import { useEffect, useRef } from "react";
+import { useEffect, useLayoutEffect, useRef } from "react";
 
 const featureList = [
   {
@@ -156,7 +156,7 @@ const featureList = [
 const MainFeatures = () => {
   const ref = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     let ctx = gsap.context(() => {
       let tl = gsap.timeline({ repeat: -1 });
 
@@ -272,19 +272,7 @@ const MainFeatures = () => {
     }, ref);
 
     let ctx2 = gsap.context(() => {
-      let tl = gsap.timeline({ repeat: -1, yoyo: true });
-
-      gsap.set("#rocket", {});
-
-      gsap.set("#rocket-path-2", {
-        drawSVG: "0% 0%",
-      });
-
-      gsap.set("#rocket-path-1", {
-        drawSVG: "0% 0%",
-      });
-
-      gsap.set("#rocket-path-3", {
+      gsap.set("#rocket-path-1, #rocket-path-2, #rocket-path-3", {
         drawSVG: "0% 0%",
       });
 
